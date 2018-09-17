@@ -1,0 +1,2 @@
+# angularApp
+all functionality
