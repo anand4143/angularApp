@@ -1,0 +1,95 @@
+<form [formGroup]="rgssnFrm" (ngSubmit)="saveSsnData()">
+
+  <div class="row top-buffer">  
+      <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 text-center">        
+        <h5>WE DON'T LIKE BEING NEW EITHER. ANSWER A FEW QUESTIONS FOR US SO WE CAN GET YOU RENTING YOUR APARTMENT.</h5>  
+    </div>        
+  </div>
+  <div class="row top-buffer">
+    <div class="col-md-8 col-md-offset-2">
+        <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <input type="text" id="search-box" >              
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <input type="text" id="Address_1" name="Address_1" placeholder="APT #"  [(ngModel)]="rgssnMdl.Address_1" [formControl]="rgssnFrm.controls['Address_1']">
+            <div class="error text-center" *ngIf="rgssnFrm.controls['Address_1'].touched && rgssnFrm.controls['Address_1'].hasError('required')">Apt number is required.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <input type="text" id="search-box"  name="Address_2" placeholder="STREET ADDRESS" [(ngModel)]="rgssnMdl.Address_2"  [formControl]="rgssnFrm.controls['Address_2']">
+              <div class="error text-center" *ngIf="rgssnFrm.controls['Address_2'].touched && rgssnFrm.controls['Address_2'].hasError('required')">Street Address is required.</div>
+            </div>
+        </div>      
+        <div class="col-sm-6">
+          <div class="form-group">
+            <input type="text" id="Address_City" name="Address_City" placeholder="City"  [(ngModel)]="rgssnMdl['Address_City']"  [formControl]="rgssnFrm.controls['Address_City']" >        
+            <div  class="error text-center" *ngIf="rgssnFrm.controls['Address_City'].touched && rgssnFrm.controls['Address_City'].hasError('required')">City is required.</div>
+          </div>
+        </div>              
+      </div>
+
+      <div class="row">        
+         <div class="col-sm-6">
+            <div class="form-group">
+              <input type="text" id="Address_State_Abbr" name="Address_State_Abbr" placeholder="STATE" [ngModel]="rgssnMdl['Address_State_Abbr'] | phonenumber" (ngModelChange)="rgssnMdl['Address_State_Abbr']=$event" [formControl]="rgssnFrm.controls['Address_State_Abbr']">              
+              <div class="error text-center" *ngIf="rgssnFrm.controls['Address_State_Abbr'].touched && rgssnFrm.controls['Address_State_Abbr'].hasError('required')">State is required.</div>
+            </div>
+        </div> 
+        <div class="col-sm-6">
+            <div class="form-group">
+              <input type="text" id="Address_ZipCode" name="Address_ZipCode" placeholder="ZIPCODE" maxlength="7" [(ngModel)]="rgssnMdl['Address_ZipCode']"  [formControl]="rgssnFrm.controls['Address_ZipCode']">              
+              <div class="error text-center" *ngIf="rgssnFrm.controls['Address_ZipCode'].touched && rgssnFrm.controls['Address_ZipCode'].hasError('required')">ZIPCODE is required.</div>
+              <div class="error text-center" *ngIf="rgssnFrm.controls['Address_ZipCode'].hasError('maxlength') && rgssnFrm.controls['Address_ZipCode'].touched">ZIPCODE is wrong</div>
+              <div class="error text-center" *ngIf="rgssnFrm.controls['Address_ZipCode'].hasError('maxlength') && !rgssnFrm.controls['Address_ZipCode'].dirty">ZIPCODE is wrong</div>
+              </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <input type="text" id="User_SSN" name="User_SSN" placeholder="SOCIAL SECURITY NUMBER" OnlyNumber="true" limit-to="11"
+            [ngModel]="rgssnMdl.User_SSN | ssn" (ngModelChange)="rgssnMdl.User_SSN=$event" [formControl]="rgssnFrm.controls['User_SSN']" >
+            <div class="error text-center" *ngIf="rgssnFrm.controls['User_SSN'].touched && rgssnFrm.controls['User_SSN'].hasError('required')">social security number is required.</div>
+            <div class="error text-center" *ngIf="rgssnFrm.controls['User_SSN'].touched && error">{{error}}</div>
+          </div>
+        </div>        
+        <div class="col-sm-6 ">
+          <div class="form-group margin-adjust">
+            <!--<my-date-picker  [options]="myDatePickerOptions" [selDate]="selBirthday" [placeholder]="placeholder" (dateChanged)="onFromDateChanged($event)" ></my-date-picker> -->
+           <my-date-picker placeholder="MM/DD/YYYY" OnlyNumber="true" [options]="myDatePickerOptions" [selDate]="selBirthday" (dateChanged)="onFromDateChanged($event)" ></my-date-picker> 
+           <div class="error text-center" *ngIf="rgssnFrm.controls['User_DOB'].touched && rgssnFrm.controls['User_DOB'].hasError('required')">birthday date is required.</div>
+            <div class="error text-center" *ngIf="rgssnFrm.controls['User_DOB'].touched && error">{{error}}</div>
+            <div class="error text-center">{{vmsg}}</div>  
+          </div>
+        </div>
+      </div> 
+
+      <div class="row">
+        <div class="col-sm-12 text-center">
+          <div class="form-group buttons">
+            <div class="row">
+              <div class="col-xs-2  col-sm-offset-2 pad-l0">
+                <button class="backbtn" type="button" (click)="gbf()"></button>                 
+              </div>
+              <div class="col-xs-10 col-sm-6">
+                <button type="submit" [disabled]="!rgssnFrm.valid">Save</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>  
+</form>
+<app-register-progress *ngIf="auth.isLoggedIn()"></app-register-progress>  
+

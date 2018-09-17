@@ -1,0 +1,22 @@
+<header class="main-logo text-center" *ngIf="isLoginScreen()">
+  <a [routerLink]="['/']">C<span class="logo-text-color">O</span>NCREET</a>
+</header>
+
+<div class="sub-logo" *ngIf="isLoggedIn()" (click)="auth.hideMenu()">
+  <a [routerLink]="[auth.getRoute('home')]" title="Home">C<span class="logo-text-color">O</span>NCREET</a>
+</div>
+
+<div *ngIf="isLoggedIn()">
+  <!--<p class="welcome-home" (click)="auth.showMenu($event)">Welcome Home {{auth.getName()}} &nbsp; <span class="glyphicon glyphicon-triangle-bottom"></span></p>-->
+  <p class="welcome-home" (click)="auth.showMenu($event)">Welcome Home {{auth.getFirstName()}} &nbsp; <span class="glyphicon glyphicon-triangle-bottom"></span></p>
+
+  <div *ngIf="auth.getMenu()" class="welcome-home-dropdown">
+    <a *ngIf="auth.getUserRole() == constants.userRole.renter" [routerLink]="[auth.getRoute('usersummary')]" id="userInfo">My Info</a>
+    <a *ngIf="auth.getUserRole() == constants.userRole.landlord" [routerLink]="['landlord/paypal-edit']" id="paymentInfo">Payment Info</a>
+    <a (click)="changePassword()">Account Setting</a>
+    <a (click)="logout()" id="userLogOut">Log Out</a>
+  </div>
+
+  <!--notifications-->
+  <!--<p class="notifications" (click) = "getNotificationDialog()"><span class="badge">{{auth.getNotification().length}}</span> </p>-->
+</div>

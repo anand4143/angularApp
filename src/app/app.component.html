@@ -1,0 +1,11 @@
+<div class="container-fluid main-column" (click)="auth.hideMenu()">
+  <app-header></app-header>
+
+  <div class="dashboard-layout">
+    <div class="column-wrapper">
+      <router-outlet></router-outlet>
+      <app-preloader-full></app-preloader-full>
+    </div>
+  </div>
+</div>
+<app-footer (click)="auth.hideMenu()"></app-footer>

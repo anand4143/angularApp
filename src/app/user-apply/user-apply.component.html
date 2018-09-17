@@ -1,0 +1,89 @@
+<div class="columns">
+  <div class="col-side bordered">
+    <!-- Start user progress component-->
+    <app-sidebar></app-sidebar>
+    <!-- End user progress component-->
+  </div>
+  <div class="col gutter-left"  style="width:100%;">
+    <div class="top-bordered">
+      <div class="top-icons">
+        <app-user-progress></app-user-progress>
+      </div>
+      <header class="row title-btns-split">
+        <div class="col-xs-12 col-sm-6 col-md-7 col-lg-8">
+          <!--<header class="title-btns-split">-->
+            <h1 *ngFor="let address of bkmrk.getAddressArray()">{{address}}</h1>
+          <!--</header>-->
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-5 col-lg-4">
+          <div class="row">
+            <button class="col-xs-12 backbtn" type="button" (click)="gbf()"></button>
+            <!--<div class="col-xs-9">
+                <button class="button" (click)="scheduleView()">Schedule a Viewing</button>
+            </div>-->
+          </div>
+          
+        </div>
+        <div class="text-right" *ngIf="bkmrk.checkCurrentBookmarkId()">
+          <div *ngIf="bkmrk.getCurrentBookmarkStatus() > constants.bookmarkStatus.applied" >
+            <h1> Represented by &nbsp;{{bkmrkAppSrv.getBrokerName()}} / {{bkmrkAppSrv.getBrokerContact()}} </h1>
+          </div>
+        </div>
+      </header>
+
+
+      <div  *ngIf="verificationArray.length>0">
+        <div class="row">
+          <div class="col-lg-12 box-area">
+            <div class="row data-area">
+              <div class="col-xs-6 col-sm-12 col-md-6 col-lg-4 data-box" *ngFor="let box of verificationArray">
+                <div class="info-box" (click)="goToLocation(box)">
+                  <span *ngIf="box.name">{{box.name}}<br/><br/></span>
+                  <span *ngIf="box.dob">DOB:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{box.dob}}<br/></span>
+                  <span *ngIf="box.ssn">SSN:&nbsp;&nbsp;&nbsp;{{box.ssn}}<br/></span>
+                  <span *ngIf="box.userfile">
+                    <img src="{{config.getS3Bucket()}}{{box.userfile}}" height="110" width="110" (click)="bkmrkAppSrv.downloadFile(box['File_Original_Name'], 'ID')" />
+                  </span>
+                  <span *ngIf="box.text1">{{box.text1}}<br/></span>  
+                  <span *ngIf="box.showTick && isApproved(box)"><i class="fa fa-check" aria-hidden="true"></i><br/></span>
+                  <br />                              
+                  <span *ngIf="box.fileCounter">{{box.fileCounter}}&nbsp;</span>
+                  <span *ngIf="box.counterText">{{box.counterText}}<br/></span>
+                  <span *ngIf="box.text2">{{box.text2}}<br/></span>
+                  <span *ngIf="box.showIncomeTick && isApproved(box)"><i class="fa fa-check" aria-hidden="true"></i><br/></span>
+                </div>              
+              </div>
+            </div>
+          </div>
+
+          <!--<div class="col-lg-5 progress-box">
+            <div class="row is-table-row" *ngFor="let box of verificationArray; let i=index">
+              <div class="col-xs-5 progress-desc">{{box.Verification_Description}}&nbsp;:
+              </div>
+              <div class="col-xs-2 rel-pos" (click)="goToLocation(box)">
+                <div class="bar" [ngClass]="{'mark-notChecked':isReviewed(box), 'mark-inComplete':isIncomplete(box), 
+                'mark-inProgress':isInProcess(box), 'mark-complete':isApproved(box)}"></div>
+              </div>
+              <div class="col-xs-2 rel-pos">
+                <div class="bar mark-notChecked"></div>
+              </div>
+              <div class="col-xs-3"><input type="text" value=""  [(ngModel)]="box.Application_Verification_Cost" readonly /> 
+              </div>
+            </div>    
+            <br/>
+            <div class="row">
+              <div class="col-xs-5"></div>
+              <div class="col-xs-2 pad-l-0">Progress</div>
+              <div class="col-xs-2 pad-l-0">Savings</div>
+              <div class="col-xs-3">Fees</div>
+            </div>      
+          </div>-->
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+

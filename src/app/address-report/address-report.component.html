@@ -1,0 +1,89 @@
+<div class="row top-buffer">
+  <div class="col-xs-10 text-center">
+    <h3 class="report">Address Report</h3>
+  </div>
+  <div class="col-xs-2">
+    <button class="backbtn" type="button" (click)="gbf()"></button>
+  </div>
+</div>
+<div class="container-fluid">
+  {{error}}
+  <div class="row top-buffer" *ngIf="addressService.getSSNReport()['breakdown']">
+    <br>
+    <div><strong>Report Date:</strong> {{addressService.getSSNReport()['created_at']}}&nbsp;( <i>Valid for 30 days from Report Date.</i> )</div>
+    <h3>{{auth.getName()}}:&nbsp;{{addressService.getSSNReport()['result']}}</h3>
+    <br>
+    <span class="glyphicon glyphicon-ok-circle"></span>&nbsp;<strong> Date Of Birth: </strong>{{addressService.getSSNReport()['breakdown']['date_of_birth']['result']}}
+    <br> <br>
+    <span class="glyphicon glyphicon-ok-circle"></span>&nbsp; <strong>Mortality:</strong> {{addressService.getSSNReport()['breakdown']['mortality']['result']}}
+    <br> <br>
+    <span class="glyphicon glyphicon-alert"></span>&nbsp; <strong>SSN: </strong>{{addressService.getSSNReport()['breakdown']['ssn']['result']}}
+    <br> <br> &nbsp;&nbsp;
+    <span class="glyphicon glyphicon-alert"></span>&nbsp; <strong>SSN is:</strong> {{addressService.getSSNReport()['breakdown']['ssn']['breakdown']['ssn_is_valid']['result']}}
+    <br> &nbsp;&nbsp;
+    <span class="glyphicon glyphicon-ok-circle"></span>&nbsp; <strong> SSN for the given first name, last name and DOB: </strong>{{addressService.getSSNReport()['breakdown']['ssn']['breakdown']['ssn_for_the_given_first_name,_last_name_and_dob']['result']}}
+    <h3> Details</h3>
+    <h4>Associated addresses:</h4>
+    <div *ngIf="addressService.getSSNReport()['properties']">
+      <div *ngFor="let address of addressService.getSSNReport()['properties']['addresses']; let i = index;">
+        <br>
+        <h4>Address {{i+1}}</h4>
+        <div class="row">
+          <div class="col-xs-4 col-sm-2">
+            <strong>Town </strong>
+          </div>
+          <div class="col-xs-1 col-sm-1">
+            <strong>:</strong>
+          </div>
+          <div class="col-xs-7 col-sm-9">
+            {{address.town}}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-4 col-sm-2">
+            <strong>State </strong>
+          </div>
+          <div class="col-xs-1 col-sm-1">
+            <strong>:</strong>
+          </div>
+          <div class="col-xs-7 col-sm-9">
+            {{address.state}}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-4 col-sm-2">
+            <strong>Postcode </strong>
+          </div>
+          <div class="col-xs-1 col-sm-1">
+            <strong>:</strong>
+          </div>
+          <div class="col-xs-7 col-sm-9">
+            {{address.postcode}}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-4 col-sm-2">
+            <strong>Matched </strong>
+          </div>
+          <div class="col-xs-1 col-sm-1">
+            <strong>:</strong>
+          </div>
+          <div class="col-xs-7 col-sm-9">
+            {{address.county}}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-4 col-sm-2">
+            <strong>County </strong>
+          </div>
+          <div class="col-xs-1 col-sm-1">
+            <strong>:</strong>
+          </div>
+          <div class="col-xs-7 col-sm-9">
+            {{address.matched}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

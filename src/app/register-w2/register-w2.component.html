@@ -1,0 +1,166 @@
+<form (ngSubmit)="uploadUserFile()">
+
+  <div class="row top-buffer">  
+      <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 text-center">  
+        <h4>W2</h4>      
+        <!--<h5>WE DON'T LIKE BEING NEW EITHER. ANSWER A FEW QUESTIONS FOR US SO WE CAN GET YOU RENTING YOUR APARTMENT.</h5>  -->
+    </div>        
+  </div>
+  
+  
+  <div class="row top-buffer" *ngIf="manualUpload == 2">
+      <div class="col-md-8 col-md-offset-2 text-center">   
+        <!--<div *ngIf="!isPulled">
+            <div class="row">
+              <div class="col-sm-12 text-center">
+                 <div class="row">
+                  <div class="col-sm-offset-2 col-sm-8 pad-l0">
+                    {{employerName['company.Company_Name']}}
+                  </div>
+                </div>  
+              </div>             
+          </div>
+
+          <div class="row">
+            <div class="col-sm-12 text-center">
+              <div class="form-group buttons">
+                <div class="row">
+                  <div class="col-xs-2  col-sm-offset-2 pad-l0">
+                    <button class="backbtn" type="button" (click)="gbf()"></button>                 
+                  </div>
+                  <div class="col-xs-10 col-sm-6">
+                     <button type="button" id="pullbutn" (click)="goToW2Result()" >PULL MY W2</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+        </div>-->
+
+        <!--<div *ngIf="isPulled">-->
+        <div>
+          <!--<div class="center-text">
+              <label for="file-upload" class="round-button" [ngClass]="{disabled:isUploaded}">Choose w2</label><br/>
+              <a><span class="filename" (click)="fileSrv.downloadFile(W2File['File_Original_Name'],'W2')" id="file-selected-1" style="display:inherit" *ngIf="isSelected || isUploaded">{{ W2File['File_Original_Name'] }}</span></a><br/>
+              <a><span id="delete-1" class="delete" *ngIf="isUploaded" (click)="deleteW2file('are you sure you want to delete the files from our system?')">Delete File</span></a>
+              <div class="input file">
+                  <input type="file"  (change)="attachFile($event)" [(ngModel)]="w2Mdl.w2files" [formControl]="w2Frm.controls['w2files']" id="file-upload"  style="display:none">
+              </div>               
+          </div>-->
+          <!--<div class="form-group buttons">-->
+            <!--<div class="center-text">
+            <div class="row">
+              <div class="center-text">
+                <div class="col-xs-2">
+                  <button class="backbtn" type="button" (click)="gbf()"></button>                 
+                </div>
+                <div class="col-xs-10">
+                  <button type="submit" [ngClass]="{disabled:!isSelected}" [disabled]="!w2Frm.valid" >UPLOAD</button>
+                </div>
+            </div>
+          </div>
+          </div>-->
+           <div class="row">
+              <div class="col-sm-12 text-center">
+                 <div class="row">
+                  <div class="col-sm-offset-2 col-sm-8 pad-l0">
+                    <label for="file-upload" class="round-button" [ngClass]="{disabled:isUploaded}">Choose w2</label><br/>
+                  </div>
+                </div>
+                <a><span class="filename" (click)="fileSrv.downloadFile(W2File['File_Original_Name'],'W2')" id="file-selected-1" style="display:inherit" *ngIf="isSelected || isUploaded">{{ W2File['File_Original_Name'] }}</span></a><br/>
+                <a><span id="delete-1" class="delete" *ngIf="isUploaded" (click)="deleteW2file('are you sure you want to delete the files from our system?')">Delete File</span></a>
+                <div class="input file">
+                    <input type="file"  (change)="attachFile($event)" [(ngModel)]="w2Mdl.w2files" [formControl]="w2Frm.controls['w2files']" id="file-upload"  style="display:none">
+                </div>   
+              </div>             
+          </div>
+
+          <div class="row">
+            <div class="col-sm-12 text-center">
+              <div class="form-group buttons">
+                <div class="row">
+                  <div class="col-xs-2  col-sm-offset-2 pad-l0">
+                    <button class="backbtn" type="button" (click)="gbf()"></button>                 
+                  </div>
+                  <div class="col-xs-10 col-sm-6">
+                    <button type="submit" [ngClass]="{disabled:!isSelected}" [disabled]="!w2Frm.valid" >UPLOAD</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--<div class="form-group text-center">
+           <a href="/register-credit" (click)="skippedFun()">SKIP FOR NOW</a>
+           <a href="javascript:void(0);" (click)="skippedFun()">SKIP FOR NOW</a>
+          </div>-->
+        </div>
+    </div>        
+  </div>
+
+  <div class="row top-buffer" *ngIf="manualUpload == 1">
+      <div class="col-md-8 col-md-offset-2 text-center">       
+        <div>          
+           <div class="row">
+              <div class="col-sm-12 text-center">
+                 <div class="row">
+                   <div class="col-sm-offset-2 col-sm-8 pad-l0">
+                   <table>
+                     <tbody>
+                       <tr>
+                         <td>
+                           Last Year Income : 
+                         </td>
+                         <td>
+                           {{plaidW2.W2_Last_Year_Income}}
+                         </td>
+                       </tr>
+                       <tr>
+                         <td>
+                           Last Year Income Before Tax : 
+                         </td>
+                         <td>
+                           {{plaidW2.W2_Last_Year_Income_Before_Tax}}
+                         </td>
+                       </tr>
+                       <tr>
+                         <td>
+                           Projected Yearly Income : 
+                         </td>
+                         <td>
+                           {{plaidW2.W2_Projected_Yearly_Income}}
+                         </td>
+                       </tr>
+                       <tr>
+                         <td>
+                           Projected Yearly Income Before Tax : 
+                         </td>
+                         <td>
+                           {{plaidW2.W2_Projected_Yearly_Income_Before_Tax}}
+                         </td>
+                       </tr>
+                     </tbody>
+                   </table>  
+                   </div>               
+                </div>                 
+              </div>             
+          </div>
+
+          <div class="row">
+            <div class="col-sm-12 text-center">
+                <div class="row">
+                    <div class="col-sm-offset-2 col-sm-8 pad-l0">
+                        <button class="backbtn" type="button" (click)="gbf()"></button>
+                    </div>
+                </div>
+            </div>
+          </div>
+     
+        </div>
+    </div>        
+  </div> 
+
+</form>
+
+<app-register-progress></app-register-progress>

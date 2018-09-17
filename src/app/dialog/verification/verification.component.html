@@ -1,0 +1,54 @@
+<div class="modal-content" (keyup)="keyUp($event)">
+  <div class="modal-header">
+    <h3 class="modal-title">
+      <span class="pull-right" (click)="close()"><i class="fa fa-times fa-lg" aria-hidden="true"></i></span>
+      <!--<span class="pull-left">{{verificationItem.Verification_Description}}</span>-->
+    </h3>
+  </div>
+  <div *ngIf="!verificationItem.RenterUserId" class="modal-body">
+    <div class="pull-center mrg-bottom"><span class="pull-center">{{verificationItem.Verification_Description}}</span></div>
+    <button #userInfo *ngIf="!landlordModal" class="btn-focus"></button>
+    <div class="pull-center mrg-bottom">
+      <span *ngIf="verificationItem.name">Name:&nbsp;&nbsp;{{verificationItem.name}}</span>
+    </div>
+    <div class="pull-center mrg-bottom">
+      <span *ngIf="verificationItem.dob">DOB:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{verificationItem.dob}}</span>
+    </div>
+    <div class="pull-center mrg-bottom">
+      <span *ngIf="verificationItem.ssn">SSN:&nbsp;&nbsp;&nbsp;{{verificationItem.ssn}}<br/></span>
+    </div>    
+    <div class="pull-center mrg-bottom">
+      <span *ngIf="verificationItem.company">{{verificationItem.company}}<br/></span>
+    </div>
+    <!--<div class="pull-center mrg-bottom">
+      <span *ngIf="verificationItem.text1">{{verificationItem.text1}}</span>
+    </div>-->
+    <!--<div class="pull-center mrg-bottom">
+      <span *ngIf="verificationItem.text2">{{verificationItem.text2}}</span>
+    </div>-->
+    <span *ngIf="verificationItem.fileId1">
+      <a><span class="filename" (click)="fileSrv.downloadFileById(verificationItem.fileName1,verificationItem.fileId1)" 
+      style="display:inherit">{{ verificationItem.fileName1 }}</span></a>
+    <br/><br/><br/>
+    </span>
+    <span *ngIf="verificationItem.fileId2">
+      <a><span class="filename" (click)="fileSrv.downloadFileById(verificationItem.fileName2,verificationItem.fileId2)" 
+      style="display:inherit">{{ verificationItem.fileName2 }}</span></a>
+    <br/>
+    </span>
+  </div>
+  <div *ngIf="verificationItem.RenterUserId" class="modal-body">  
+    <div class="pull-center mrg-bottom"><span class="pull-center">{{verificationItem.Verification_Description}}</span></div>  
+    <a target="_blank" (click)="gotoReport(verificationItem.RenterUserId,verificationItem.reportType)">view report</a>
+  </div>
+  <!--<div class="row modal-footer" *ngIf="bkmrkAppSrv.getApplicationStatus()==constants.bookmarkApplicationStatus.acceptedBroker">
+    <div class="col-sm-4"><button type="button" #completeButton class="button" (click)="updateStatus(constants.verificationStatus.approved)">Complete</button></div>
+    <div class="col-sm-4"><button type="button" class="btn-default active" (click)="updateStatus(constants.verificationStatus.inComplete)">InComplete</button></div>                     
+    <div class="col-sm-4"><button type="button" class="btn-default active" (click)="updateStatus(constants.verificationStatus.inProcess)">InProgress</button></div>                     
+  </div>-->
+  <div class="row modal-footer" *ngIf="bkmrkAppSrv.getApplicationStatus()==constants.bookmarkApplicationStatus.acceptedBroker">
+    <div class="col-xs-6"><button type="button" #completeButton class="button" (click)="updateStatus(constants.verificationStatus.approved)">Mark Complete</button></div>
+    <div class="col-xs-6"><button type="button" class="btn-default active" (click)="updateStatus(constants.verificationStatus.inComplete)">Reject</button></div>
+  </div>
+  <div class="row modal-footer"></div>
+</div>

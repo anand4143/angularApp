@@ -1,0 +1,325 @@
+
+
+/* some general resets */
+.ui-widget { font-family: inherit; }
+.ui-menu .ui-menu-item-wrapper { padding: 0; }
+.ui-menu .ui-state-focus, .ui-menu .ui-state-active { margin: 0; }
+
+
+
+.component-select {
+	display: none;
+}
+
+
+
+
+.ui-selectmenu-button.ui-button {
+	border-radius: 0;
+	padding: 8px 0; margin:0;
+	font-family: inherit;
+	
+	padding-left: 2px;
+	font-weight: normal;
+	margin: 0;
+	height: auto;
+	
+	width: 100%;
+	background: transparent;
+	
+	border: none;
+	border-bottom: 1px solid;
+	border-color: inherit;
+	
+	font-size: 12px;
+	color: #2B3761;
+}
+
+.ui-button .ui-icon {
+	margin-right: 8px;
+	margin-top: 0px;
+}
+
+.ui-button:hover {
+	outline: none;
+}
+
+.ui-button:focus {
+	outline: none;
+}
+
+
+
+
+/* submenu */
+.ui-selectmenu-open {
+	
+}
+.ui-selectmenu-open ul.ui-widget.ui-widget-content {
+	border-radius: 0;
+	padding: 0;
+	margin: 0;
+	border: 1px solid;
+	border-top: none;
+}
+
+/* submenu specific to select menu */
+.ui-selectmenu-menu .ui-menu {
+	color: #FFF;
+	font-size: 12px;
+	font-weight: normal;
+	background: rgba(59,74,113,0.9);
+	border: none;
+}
+
+/* submenu specific to autocomplete */
+.ui-autocomplete.ui-menu {
+	color: #FFF;
+	font-size: 12px;
+	font-weight: normal;
+	background: rgba(59,74,113,0.9);
+	margin-top: -1px;
+	border: none;
+}
+
+/* submenu element */
+.ui-menu .ui-menu-item-wrapper {
+	border: none;
+	padding: 15px 20px;
+}
+
+/* active submenu element */
+.ui-menu.ui-widget-content .ui-state-active {
+	border: none;
+	background: rgba(38,48,74,0.4);
+	color: #FFF;
+	font-weight: inherit;
+}
+
+
+
+/* buttonset fieldset */
+fieldset {
+	margin: 0;
+	padding: 0;
+	border: none;
+	outline: none;
+	padding-left: 1px;
+}
+
+.button-set .ui-helper-hidden-accessible {
+	visibility: hidden;
+}
+
+.button-set .ui-checkboxradio-label {
+	float: left;
+	background: #F5F8FB;
+	margin: 0;
+	text-align: center;
+	margin-left: -1px;
+	transition: border-color 0.2s, background-color 0.2s, color 0.2s;
+}
+
+.button-set .ui-checkboxradio-label.ui-state-active {
+	background: #FFF;
+	outline: 0;
+	z-index: 2;
+	border-color: #3FA8D6;
+}
+
+.button-set .ui-checkboxradio-label .ui-checkboxradio-icon {
+	display: none;
+}
+
+
+
+
+/* checkboxes */
+.ui-checkbox, .ui-checkbox + label {
+	display: none;
+}
+
+label.ui-checkboxradio-label, label.ui-checkboxradio-label:hover {
+	display: inline-block;
+	margin: 0;
+	padding: 0;
+	padding-left: 40px;
+	line-height: 28px;
+	min-height: 26px;
+	border: none;
+	outline: none;
+	font-size: 13px;
+	font-weight: normal;
+	box-shadow: none;
+	color: #2B3761;
+	text-align: left;
+	background: none;
+	transition: background-image 0.2s;
+}
+
+label.ui-checkboxradio-label.ui-state-active, label.ui-checkboxradio-label.ui-state-active:hover {
+	display: inline-block;
+	background: transparent url(../assets/ui/checkbox-checked.svg) no-repeat center left;
+	border: none;
+	outline: none;
+	font-weight: normal;
+	box-shadow: none;
+	color: #2B3761;
+}
+
+label.ui-checkboxradio-label::before {
+	content: "";
+	box-sizing: border-box;
+	background: #F6F7F8 url(../assets/ui/checkbox-unchecked.svg) no-repeat center center;
+	border: 1px solid #C8CDD2;
+	position: absolute;
+	width: 26px;
+	height: 26px;
+	left: 0;
+    top: 0;
+	border-radius: 3px;
+	transition: border-color 0.2s, background-color 0.2s, background-image 0.2s;
+}
+
+label.ui-checkboxradio-label.ui-state-active::before {
+	border-color: #FE2593;
+	background: #FFF url(../assets/ui/checkbox-checked.svg) no-repeat center center;
+}
+
+/* just to preload the img */
+input.ui-checkboxradio {
+	background: url(../assets/ui/checkbox-checked.svg);
+}
+
+
+
+
+/* sliders */
+.ui-widget.ui-slider {
+	float: left;
+	width: 600px;
+	height: 7px;
+	border-radius: 4px;
+	background: #D8E3E9;
+	border: none;
+}
+
+.ui-widget.ui-slider .ui-slider-range {
+	background: #3EA7D5;
+}
+
+.ui-widget.ui-slider .ui-slider-handle {
+	width: 30px;
+	height: 30px;
+	border-radius: 15px;
+	border: none !important;
+	outline: none !important;
+	background: #FFF;
+	box-shadow: 0 5px 12px rgba(0,0,0,0.2);
+	margin-top: -8px;
+	white-space: nowrap;
+	
+	line-height: 99px;
+    color: #4A657F;
+    font-size: 13px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.ui-widget.ui-slider .ui-slider-handle span.long {
+	width: 70px;
+    display: inline-block;
+    line-height: 1.2em;
+    margin-left: -35px;
+    left: 50%;
+}
+
+.slider-range-min, .slider-range-max {
+	display: none;
+}
+
+
+
+
+.ui-tooltip {
+	box-shadow: 0 0 12px rgba(0,0,0,0.15);
+	cursor: default;
+}
+
+.ui-tooltip::before {
+	content: '';
+	position: absolute;
+	top: 50%;
+	margin-top: -5px;
+	left: -4px;
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-width: 5px 4px 5px 0;
+	border-color: transparent #ffffff transparent transparent;
+}
+
+.ui-tooltip .ui-tooltip-content {
+	font-size: 12px;
+	font-weight: bold;
+}
+
+
+
+
+/* accordion */
+.ui-accordion .ui-accordion-header {
+	margin: 0;
+	border-radius: 0;
+	background: #FBFDFE;
+	outline: none !important;
+	border: none;
+	border-top: 1px solid #D4E0E6;
+	color: #4A657F;
+	font-weight: bold;
+	font-size: 15px;
+	text-transform: uppercase;
+	padding: 36px 25px 34px;
+	position: relative;
+	transition: background-color 0.2s;
+}
+
+.ui-accordion .ui-accordion-header.ui-state-active {
+	background-color: #FFF;
+}
+
+.ui-accordion .ui-accordion-header small {
+	margin: 0;
+	font-weight: normal;
+	font-size: 15px;
+	text-transform: none;
+}
+
+.ui-accordion .ui-icon {
+	width: 35px;
+	height: 35px;
+	background: transparent url(../assets/ui/accordion-arrow.svg) no-repeat top center;
+	position: absolute;
+	right: 25px;
+	top: 31px;
+	transition: background-image 0.3s, transform 0.3s;
+}
+
+.ui-accordion .ui-state-active .ui-icon {
+	background: transparent url(../assets/ui/accordion-arrow.svg) no-repeat bottom center;
+	-webkit-transform: rotate(180deg);
+	-moz-transform: rotate(180deg);
+	-ms-transform: rotate(180deg);
+	-o-transform: rotate(180deg);
+	transform: rotate(180deg);
+}
+
+.ui-accordion .ui-accordion-content {
+	padding-top: 0;
+	padding-bottom: 25px;
+	border-radius: 0;
+	border: none;
+	margin: 0;
+}
+
+

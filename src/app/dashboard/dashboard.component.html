@@ -1,0 +1,69 @@
+<div class="columns">
+  <div class="col-side bordered">
+    <app-sidebar></app-sidebar>
+  </div>
+  <div class="col gutter-left" style="width:100%;">
+<div class="top-bordered">
+  <div class="top-icons">
+    <app-user-progress></app-user-progress>
+  </div>
+  <header class="row title-btns-split">
+    <div class="col-xs-12 col-sm-5 col-md-6 col-lg-7">
+      <!--<h1 *ngFor="let address of bkmrkSrv.getAddressArray()">{{address}}</h1>-->
+      <div *ngIf="!bkmrkSrv.getClientButtonStatus()"><h1 *ngFor="let address of bkmrkSrv.getAddressArray()">{{address}}</h1></div>
+      <div *ngIf="bkmrkSrv.getClientButtonStatus()"><h1 *ngFor="let renter of bkmrkSrv.getRenterDetails()">{{renter}}</h1></div>
+    </div>
+    <div class="col-xs-12 col-sm-7 col-md-6 col-lg-5">
+      <a class="button" [routerLink]="[auth.getRoute('home')]">View Applications </a>
+      <!--<a class="button">View Leased Contracts</a>-->
+    </div>
+  </header>
+  <table *ngIf="!bkmrkSrv.getClientButtonStatus()">
+    <!--<tbody *ngFor="let renter of bkmrkSrv.getRenterInfo()">-->
+    <!--<tbody *ngFor="let renter of applications">-->
+    <tbody *ngFor="let renter of bkmrkAppSrv.getApplicationsList()">
+      <tr (click)="brokerAccept(renter)">
+        <td class="wid-10"><i class="fa fa-user-circle fa-3x"></i></td>
+        <td>{{renter.User_First_Name}}{{renter.Renter_First_Name}}&nbsp;{{renter.User_Last_Name}}{{renter.Renter_Last_Name}}&nbsp;
+          <span *ngIf="renter.Bookmark_Status == constants.bookmarkStatus.applied">applied&nbsp;</span>
+          <span *ngIf="(renter.Bookmark_Application_Status == constants.bookmarkApplicationStatus.acceptedBroker) ">to be approved&nbsp;</span>  
+          <span *ngIf="(renter.Bookmark_Application_Status == constants.bookmarkApplicationStatus.approvedBroker) ">in process&nbsp;</span>   
+          <span *ngIf="(renter.Bookmark_Application_Status == constants.bookmarkApplicationStatus.docLoaded) ">send for signing&nbsp;</span> 
+          <span *ngIf="(renter.Bookmark_Application_Status == constants.bookmarkApplicationStatus.docSigned) ">document signed&nbsp;</span>     
+          <span *ngIf="(renter.Bookmark_Application_Status == constants.bookmarkApplicationStatus.acceptedLandlord)">forwarded to landlord&nbsp;</span>
+          <span *ngIf="renter.Bookmark_Application_Status > constants.bookmarkApplicationStatus.acceptedLandlord">approved by landlord&nbsp;</span>
+
+          <span *ngIf="renter.Bookmark_Status == constants.bookmarkStatus.toBeApplied">bookmarked&nbsp;</span>as on&nbsp;
+          <span *ngIf="renter.Bookmark_Modification_Date">{{renter.Bookmark_Modification_Date | date:'MM/dd/yyyy'}}</span>
+          <span *ngIf="renter.Bookmark_Application_Modification_Date">{{renter.Bookmark_Application_Modification_Date | date:'MM/dd/yyyy'}}</span>
+          <span *ngIf="(renter.Broker_User_ID != auth.getUserId()) "> by&nbsp; {{renter.Broker_First_Name}} &nbsp; {{renter.Broker_Last_Name}}</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <table *ngIf="bkmrkSrv.getClientButtonStatus()">
+    <!--<tbody *ngFor="let renter of bkmrkSrv.getRenterInfo()">-->
+    <!--<tbody *ngFor="let renter of applications">-->
+    <tbody *ngFor="let renter of bkmrkAppSrv.getApplicationsList()">
+      <tr (click)="brokerAccept(renter)">
+        <td class="wid-10"><i class="fa fa-user-circle fa-3x"></i></td>
+        <td>{{renter.Property_Unit_Number}},&nbsp;{{renter.Property_Address}},&nbsp;{{renter.Property_City}}&nbsp;
+          <span *ngIf="renter.Bookmark_Status == constants.bookmarkStatus.applied">applied&nbsp;</span>
+          <span *ngIf="(renter.Bookmark_Application_Status == constants.bookmarkApplicationStatus.acceptedBroker) ">to be approved&nbsp;</span>  
+          <span *ngIf="(renter.Bookmark_Application_Status == constants.bookmarkApplicationStatus.approvedBroker) ">in process&nbsp;</span>   
+          <span *ngIf="(renter.Bookmark_Application_Status == constants.bookmarkApplicationStatus.docLoaded) ">send for signing&nbsp;</span> 
+          <span *ngIf="(renter.Bookmark_Application_Status == constants.bookmarkApplicationStatus.docSigned) ">document signed&nbsp;</span>     
+          <span *ngIf="(renter.Bookmark_Application_Status == constants.bookmarkApplicationStatus.acceptedLandlord)">forwarded to landlord&nbsp;</span>
+          <span *ngIf="renter.Bookmark_Application_Status > constants.bookmarkApplicationStatus.acceptedLandlord">approved by landlord&nbsp;</span>
+
+          <span *ngIf="renter.Bookmark_Status == constants.bookmarkStatus.toBeApplied">bookmarked&nbsp;</span>as on&nbsp;
+          <span *ngIf="renter.Bookmark_Modification_Date">{{renter.Bookmark_Modification_Date | date:'MM/dd/yyyy'}}</span>
+          <span *ngIf="renter.Bookmark_Application_Modification_Date">{{renter.Bookmark_Application_Modification_Date | date:'MM/dd/yyyy'}}</span>
+          <span *ngIf="(renter.Broker_User_ID != auth.getUserId()) "> by&nbsp; {{renter.Broker_First_Name}} &nbsp; {{renter.Broker_Last_Name}}</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</div>
+</div>

@@ -1,0 +1,18 @@
+.glyphicon-ok-circle{
+    color: green;
+ }
+
+.glyphicon-alert{
+    color: orange;
+ }
+
+.btn-warning{
+    width: 10%;
+    height: 1%;
+ }
+
+@media(min-width:550px){
+ .backbtn{
+    right: 60px !important;
+ }
+}

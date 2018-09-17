@@ -1,0 +1,19 @@
+.margin-adjust{
+    margin: 18px 0px;
+}
+
+.adjust-dashboard{
+    margin-top: -100px;
+}
+
+.adjust-terms-condition{
+    font-size: 14px;
+}
+
+a{
+ font-size: 14px;
+}
+
+input[type=checkbox] {
+    vertical-align: text-top;
+}

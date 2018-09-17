@@ -1,0 +1,121 @@
+<div class="columns">
+  <div class="col-side bordered">
+    <!-- Start user progress component-->
+    <app-sidebar></app-sidebar>
+    <!-- End user progress component-->
+  </div>
+  <div class="col gutter-left"  style="width:100%;">
+    <div class="top-bordered">
+      <div class="top-icons">
+        <app-user-progress></app-user-progress>
+      </div>
+      <header class="row title-btns-split">
+        <div class="col-xs-12 col-sm-5 col-md-6 col-lg-7">
+          <!--<header class="title-btns-split">-->
+            <h1 *ngFor="let address of bkmrk.getAddressArray()">{{address}}</h1>
+          <!--</header>-->
+        </div>
+       <!--<div  class="col-xs-12 col-sm-6 col-md-5 col-lg-4" >         
+          <div *ngIf="!viewLandlordBtn">
+            <span *ngIf="successMsg && costsChangeVar" class="success text-center">{{postBtnMsg}}</span>
+            <button class="button" *ngIf="!addLandLordButton && verifyStatus" (click)="approveApplication()" id="addLandlordButton">Add Documents</button>
+            <button class="button" *ngIf="!verifyStatus" (click)="saveVerificationCosts()">Save</button>
+          </div>
+          <div *ngIf="viewLandlordBtn">
+            <button class="button" (click)="addNewLandlord()">
+              <span *ngIf="addLandlord">Add</span>
+              <span *ngIf="!addLandlord">View</span>
+              &nbsp;Documents
+              </button>      
+          </div>
+          <div class="row">
+            <button class="col-xs-3 backbtn" type="button" (click)="gbf()"></button>
+            <div class="col-xs-9">
+              <button class="button" (click)="releaseApplication()">Release</button>
+            </div>
+          </div>
+       </div>-->
+
+       <div  class="col-xs-12 col-sm-7 col-md-6 col-lg-5">         
+          <button class="button" [disabled]="verifyStatus" *ngIf="bkmrkAppSrv.getApplicationStatus() < constants.bookmarkApplicationStatus.approvedBroker" (click)="acceptAll()">ACCEPT ALL</button>
+          <button class="button" *ngIf="bkmrkAppSrv.getApplicationStatus() == constants.bookmarkApplicationStatus.approvedBroker" (click)="addDocument()" >ADD LEASE DOCUMENTS</button>
+          <button class="button" *ngIf="bkmrkAppSrv.getApplicationStatus()>constants.bookmarkApplicationStatus.approvedBroker" (click)="addDocument()" >VIEW LEASE AGREEMENT</button>
+          <button class="button" *ngIf="bkmrkAppSrv.getApplicationStatus() >= constants.bookmarkApplicationStatus.acceptedLandlord" (click)="addLandlord()" >VIEW LANDLORD</button>
+          <button class="button" *ngIf="bkmrkAppSrv.getApplicationStatus() < constants.bookmarkApplicationStatus.approvedBroker" (click)="approveApplication()">APPROVE APPLICATION</button>
+
+          <div class="row" >
+            <button  class="col-xs-3 backbtn" type="button" (click)="gbf()"></button>
+            <div class="col-xs-9">
+              <button [disabled]="bkmrkAppSrv.getApplicationStatus()>constants.bookmarkApplicationStatus.docSigned" class="button" (click)="releaseApplication()">ARCHIVE APPLICATION</button>
+            </div>
+          </div>
+       </div>
+       <div class="text-right" *ngIf="bkmrk.getRenterInfo()">
+          <h1>{{bkmrkAppSrv.getRenterInfo().name}} / {{bkmrkAppSrv.getRenterInfo().email}} / {{bkmrkAppSrv.getRenterInfo().phno}}</h1>
+       </div>
+      </header>
+      
+
+      <div  *ngIf="verificationArray.length>0 && !addLandLordButton">
+        <div class="row">
+          <!--<div class="col-lg-7 box-area">-->
+          <div class="col-xs-12 box-area">
+          <!--<div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 text-center">-->
+            <div class="row data-area">
+              <!--<div class="col-xs-6 col-sm-12 col-md-6 col-lg-4 data-box" *ngFor="let box of verificationArray; let i = index">-->
+              <div class="col-xs-6 col-sm-12 col-md-6 col-lg-4 data-box" *ngFor="let box of verificationArray; let i = index">
+                <!--<div  [ngClass]="((i == 8) && (!bkmrkAppSrv.getCreditShareStatus())) ? 'incomplete-box' : 'info-box'"  (click)="verificationPopup(box,i)">                -->
+                <div  class="info-box" (click)="verificationPopup(box,i)">
+                  <span *ngIf="box.name">{{box.name}}<br/><br/></span>
+                  <span *ngIf="box.dob">DOB:&nbsp;&nbsp;&nbsp;{{box.dob}}<br/></span>
+                  <span *ngIf="box.ssn">SSN:&nbsp;&nbsp;&nbsp;{{box.ssn}}<br/></span>                  
+                  <span *ngIf="box.userfile">
+                    <img src="{{config.getS3Bucket()}}{{box.userfile}}" height="110" width="110" />
+                  </span>
+                  <span *ngIf="box.text1">{{box.text1}}<br/></span>  
+                  <span *ngIf="box.company">{{box.company}}<br/></span>
+                  <!--<span *ngIf="box.showTick && isApproved(box)"><i class="fa fa-check" aria-hidden="true"></i><br/></span>-->
+                  <br />    
+                  <!--<span *ngIf="box.fileCounter">{{box.fileCounter}}&nbsp;</span>
+                  <span *ngIf="box.counterText">{{box.counterText}}<br/></span>
+                  <span *ngIf="box.text2 && (i!=8)">{{box.text2}}<br/></span>-->
+                  <span *ngIf="isApproved(box)" class="tick-pos"><i class="fa fa-check fa-2x"></i><br/></span>
+                  <!--<span *ngIf="((i == 8) && (bkmrkAppSrv.getCreditShareStatus()))"><i class="fa fa-check fa-3x"></i></span>
+                  <span *ngIf="((i == 8) && (!bkmrkAppSrv.getCreditShareStatus()))"><i class="fa fa-times fa-3x"></i></span>
+                  <span *ngIf="box.showIncomeTick && isApproved(box)"><i class="fa fa-check" aria-hidden="true"></i><br/></span>-->
+                </div>              
+              </div>
+            </div>
+          </div>
+
+          <!--<div class="col-lg-5 progress-box">
+            <div class="row is-table-row" *ngFor="let verificationbox of verificationArray; let i=index">
+              <div class="col-xs-5 progress-desc">{{verificationbox.Verification_Description}}&nbsp;:
+              </div>
+              <div class="col-xs-2 rel-pos" (click)="verificationPopup(verificationbox)">
+                <div class="bar" [ngClass]="{'mark-notChecked':isReviewed(verificationbox), 'mark-inComplete':isIncomplete(verificationbox), 
+                'mark-inProgress':isInProcess(verificationbox), 'mark-complete':isApproved(verificationbox)}"></div>
+              </div>
+              <div class="col-xs-2 rel-pos">
+                <div class="bar mark-notChecked"></div>
+              </div>
+              <div class="col-xs-3">
+                <input type="text" class="helpcls" name="vcosts" title="Verification Costs" (keypress)="_keyPress($event)"  [(ngModel)]="verificationbox.Application_Verification_Cost" 
+              [readonly]="viewLandlordBtn" (ngModelChange)="checkCostsChanged($event)"  maxlength="7"  /> 
+              </div>
+             
+            </div>    
+            <br/>
+            <div class="row">
+              <div class="col-xs-5"></div>
+              <div class="col-xs-2 pad-l-0">Progress</div>
+              <div class="col-xs-2 pad-l-0">Savings</div>
+              <div class="col-xs-3">Fees</div>
+            </div>      
+          </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

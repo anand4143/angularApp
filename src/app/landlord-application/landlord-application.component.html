@@ -1,0 +1,52 @@
+<div class="columns">
+  <div class="col-side bordered">
+    <!-- Start user progress component-->
+    <app-sidebar></app-sidebar>
+    <!-- End user progress component-->
+  </div>
+  <div class="col gutter-left" style="width:100%;">
+<div class="top-bordered">
+  <div class="top-icons">
+    <app-user-progress></app-user-progress>
+  </div>
+
+  <header class="row title-btns-split">
+    <div class="col-xs-12 col-sm-5 col-md-6 col-lg-7">
+      <!--<header class="title-btns-split">-->
+      <h1 *ngFor="let address of bkmrkSrv.getAddressArray()">{{address}}</h1>
+      <!--</header>-->
+    </div>
+    <div class="col-xs-12 col-sm-7 col-md-6 col-lg-5">
+      <button [ngClass]={selected:isSelectedList(1)} (click)="viewApplications()">VIEW APPLICATIONS</button>
+      <div class="row">
+        <button [ngClass]={selected:isSelectedList(2)} (click)="viewLeasedContracts()">VIEW LEASED CONTRACTS</button>
+      </div>
+    </div>
+  </header>
+
+  <div id="listing-results">
+    <p class="intro">APPLICATION ({{getNumOfRecords()}} TOTAL)</p>
+    <table>
+      <!--<thead>
+            <tr><th>Address</th> <th>Unit Num.</th></tr>
+          </thead>-->
+      <tbody *ngFor="let item of approvedApplications">
+        <tr (click)="markSelect(item)">
+          <td class="wid-10"><i class="fa fa-user-circle fa-3x"></i></td>
+          <td>{{item.Renter_First_Name}}&nbsp;{{item.Renter_Last_Name}}&nbsp;represented by {{item.Broker_First_Name}}&nbsp;{{item.Broker_Last_Name}}&nbsp;
+            <span *ngIf="item.Bookmark_Application_Status < constants.bookmarkApplicationStatus.acceptedLandlord">In Process with Broker&nbsp;</span>
+            <span *ngIf="item.Bookmark_Application_Status == constants.bookmarkApplicationStatus.acceptedLandlord">To Be approved&nbsp;</span>
+            <span *ngIf="item.Bookmark_Application_Status == constants.bookmarkApplicationStatus.approvedLandlord">In Leasing Process&nbsp;</span>
+            <span *ngIf="item.Bookmark_Application_Status == constants.bookmarkApplicationStatus.leased">Leased&nbsp;</span>as
+            on&nbsp;
+            <span>{{item.Bookmark_Application_Modification_Date | date:'MM/dd/yyyy'}}</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+</div>
+</div>

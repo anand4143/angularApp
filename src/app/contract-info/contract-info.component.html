@@ -1,0 +1,91 @@
+<div class="columns">
+  <div class="col-side bordered">
+    <!-- Start user progress component-->
+    <app-sidebar></app-sidebar>
+    <!-- End user progress component-->
+  </div>
+  <div class="col gutter-left"  style="width:100%;">
+    <div class="top-bordered">
+      <div class="top-icons">
+        <app-user-progress></app-user-progress>
+      </div>
+      <div class="row top-buffer">
+        <!--<div class="row">-->
+        <!--<div class="col-sm-6 col-sm-offset-3"><span *ngIf="viewLandlordBtn"> PLEASE ENTER YOUR </span> LANDLORD'S INFORMATION</div>-->
+      <!--</div>-->
+      <div class="row top-buffer">
+        <div class="col-sm-offset-2 col-sm-8 col-md-offset-3 col-md-6 ">
+          <form [formGroup]="newContractFrm" (ngSubmit)="createNewContract()">
+            <div class="col-sm-12 text-center">PLEASE ENTER YOUR CONTRACT INFORMATION<br/><br/><br/></div>              
+            <!--<div class="row">
+              <div class="col-xs-12" >
+                 <input type="text" [(ngModel)]="contractModel.Paypal_Email_Address" placeholder="LANDLORD PAYPAL ADDRESS" [formControl]="newContractFrm.controls['Paypal_Email_Address']" readonly>              
+              </div>             -->
+              <!--<div class="col-xs-4">
+                <button (click)="goToPayment()">EDIT</button>
+              </div>-->
+            <!--</div>
+            -->
+             <div class="row">
+               <div class="col-xs-12">
+                 <!--<my-date-picker  [options]="myFromDatePickerOptions"  [selDate] = "fromContractDate" [placeholder]="fromDateplaceholder" (dateChanged)="onFromDateChanged($event)" OnlyNumber="true" ></my-date-picker>-->
+                <input type="text" max="9999-12-31" (focus)="startfocusFunction($event)" (focusout)="startoutFocusFunction($event)" data-date-format="MM DD YYYY" [ngModel]="contractModel['Contract_Start_Date'] " (ngModelChange)="contractModel['Contract_Start_Date']=$event" placeholder="CONTRACT START DATE" [formControl]="newContractFrm.controls['Contract_Start_Date']">
+               </div>
+             </div>
+                       
+            <div>
+             <div class="error text-center" *ngIf="newContractFrm.controls['Contract_Start_Date'].touched && newContractFrm.controls['Contract_Start_Date'].hasError('required')">Contract start date is required.</div>
+             <div class="error text-center" *ngIf="newContractFrm.controls['Contract_Start_Date'].touched && error">{{error}}</div>
+            </div>
+
+            <div class="row">
+              <div class="col-xs-12">
+                <!--<my-date-picker  [options]="myToDatePickerOptions"  [selDate] = "endContractDate" [placeholder]="toDateplaceholder" (dateChanged)="onToDateChanged($event)" OnlyNumber="true" ></my-date-picker>-->
+                <input type="text" max="9999-12-31" (focus)="endfocusFunction($event)" (focusout)="endoutFocusFunction($event)" placeholder="Birthday" data-date-format="MM DD YYYY" [ngModel]="contractModel['Contract_End_Date'] " (ngModelChange)="contractModel['Contract_End_Date']=$event" placeholder="CONTRACT END DATE" [formControl]="newContractFrm.controls['Contract_End_Date']" >
+              </div>
+            </div>
+            
+            <div>
+              <div  class="error text-center" *ngIf="newContractFrm.controls['Contract_End_Date'].touched && newContractFrm.controls['Contract_End_Date'].hasError('required')">Contract end date is required.</div>
+              <div class="error text-center"  *ngIf="newContractFrm.controls['Contract_End_Date'].touched && !newContractFrm.controls['Contract_End_Date'].valid && !newContractFrm.controls['Contract_End_Date'].hasError('required')">{{error}}</div>
+            </div> 
+
+            <div class="row">
+              <div class="col-xs-12">
+                <input type="text" [(ngModel)]="contractModel['Monthly_Rent']" placeholder="MONTHLY RENT" [formControl]="newContractFrm.controls['Monthly_Rent']" readonly>
+              </div>
+            </div>           
+            
+            <div>
+              <div class="error text-center" *ngIf="newContractFrm.controls['Monthly_Rent'].touched && newContractFrm.controls['Monthly_Rent'].hasError('required')">Monthly rent is required.</div>
+              <div class="error text-center"  *ngIf="newContractFrm.controls['Monthly_Rent'].touched && !newContractFrm.controls['Monthly_Rent'].valid && !newContractFrm.controls['Monthly_Rent'].hasError('required')">Monthly rent should be number</div>
+              <div class="error text-center" *ngIf="newContractFrm.controls['Monthly_Rent'].touched && error">{{error}}</div>
+            </div>
+
+            <div class="row">
+              <div class="col-xs-12">
+                <select class="selectpicker selEmplyee"  name="Rent_Due_Date" [(ngModel)]="contractModel.Rent_Due_Date" [formControl]="newContractFrm.controls['Rent_Due_Date']">
+                <option value="0" disabled> Select due date from List</option>
+                <option *ngFor="let day of dayList" value="{{day}}"> {{day}}               
+                </option>             
+              </select>
+              </div>
+            </div>
+           
+            <div class="row" >
+              <div class="col-xs-2 ">
+                 <button class="backbtn" type="button" (click)="gbf()"></button>
+              </div>             
+              <div class="col-xs-10">
+                <button type="submit"  [disabled]="!newContractFrm.valid" >CREATE PAYMENTS</button>                
+              </div>
+            </div>          
+
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+</div>

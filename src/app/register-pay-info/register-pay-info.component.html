@@ -1,0 +1,53 @@
+<div class="columns">
+  <div class="col-side bordered">
+    <!-- Start user progress component-->
+    <app-sidebar></app-sidebar>
+    <!-- End user progress component-->
+  </div>
+  <div class="col gutter-left"  style="width:100%;">
+    <div class="top-bordered">
+      <div class="top-icons">
+        <app-user-progress></app-user-progress>
+      </div>
+      <div class="row top-buffer">
+        <!--<div class="row">-->
+        <!--<div class="col-sm-6 col-sm-offset-3"><span *ngIf="viewLandlordBtn"> PLEASE ENTER YOUR </span> LANDLORD'S INFORMATION</div>-->
+      <!--</div>-->
+      <div class="row top-buffer">
+        <div class="col-sm-offset-2 col-sm-8 col-md-offset-3 col-md-6 ">
+          <form [formGroup]="paymentFrm" (ngSubmit)="savePaymentInfo()">
+          <div class="row top-buffer form-list">
+            <div class="col-sm-12"> 
+              <div  class="text-center">
+                Enter your email-address registered with paypal
+              </div>                   
+              <div class="form-group">
+                <input type="text" id="Email_Address" name="Email_Address" placeholder="EMAIL ADDRESS"  [(ngModel)]="paymentInfoModel.Email_Address" [formControl]="paymentFrm.controls['Email_Address']" validateEmail validateEqual="Confirm_Email_Address" reverse=true>        
+                <div class="error text-center" *ngIf="paymentFrm.controls['Email_Address'].touched && paymentFrm.controls['Email_Address'].hasError('required')">e-Mail is required.</div>
+                <div class="error text-center"  *ngIf="paymentFrm.controls['Email_Address'].touched && !paymentFrm.controls['Email_Address'].valid && !paymentFrm.controls['Email_Address'].hasError('required')">Enter a valid e-Mail</div>
+              </div>    
+              <div class="form-group">
+                <input type="text" id="Confirm_Email_Address" name="Confirm_Email_Address" placeholder="CONFIRM EMAIL ADDRESS"  [(ngModel)]="paymentInfoModel.Confirm_Email_Address" [formControl]="paymentFrm.controls['Confirm_Email_Address']"  validateEqual="Email_Address">        
+                <div class="error text-center" *ngIf="paymentFrm.controls['Confirm_Email_Address'].touched && paymentFrm.controls['Confirm_Email_Address'].hasError('required')">confirm e-Mail is required.</div>
+                <div class="error text-center"  *ngIf="paymentFrm.controls['Confirm_Email_Address'].touched && !paymentFrm.controls['Confirm_Email_Address'].valid && !paymentFrm.controls['Confirm_Email_Address'].hasError('required')">e-Mails should match</div>
+              </div>
+              <div class="form-group buttons">
+                <div class="error text-center" >{{errorMessage}}</div> 
+                <div class="row">
+                  <div class="col-xs-3">
+                    <button class="backbtn" type="button" (click)="gbf()"></button>                  
+                  </div>
+                  <div class="col-xs-9">
+                    <button [disabled]="!paymentFrm.valid" type="submit">Save</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>     
+        </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

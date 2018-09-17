@@ -1,0 +1,49 @@
+/*.wrapper {    
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 10px;
+}
+
+.summary{
+    max-width: 500px;
+    margin: 2px auto;
+}
+
+.summary a {
+    font-size: 13px;
+    text-decoration: none;
+    display: block;
+    margin: 8px;
+    overflow: hidden;
+    opacity: 1;
+    transition: opacity 0.2s;
+}
+
+.summary a .right {
+    float: right;
+    width: 50%;
+}
+.summary a .left {
+    float: left;
+    width: 50%;
+}*/
+
+.info-box{
+    height: 13.27em;
+    background-color: #021245;
+    color: white;
+    padding: 4em 1em 0 1em;
+    text-align: center;
+    font-size: 0.8em;
+}
+
+
+.data-area{
+    border: 1px solid black;
+    padding: 1em 0 0 1em;
+}
+
+.data-box{
+    padding: 0 1em 1em 0;
+    cursor: pointer;
+}

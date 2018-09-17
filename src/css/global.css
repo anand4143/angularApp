@@ -1,0 +1,302 @@
+
+@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
+@import url(https://code.jquery.com/ui/1.12.0-rc.2/themes/smoothness/jquery-ui.css);
+@import url(./ui-components.css);
+@import url(./global-login-layout.css);
+@import url(./global-dashboard-layout.css);
+@import url(./global-info-layout.css);
+@import url(./global-modals.css);
+@import url(./register-progress.css);
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	position: relative;
+	border-color: #2B3761;
+}
+
+html {
+	height: 100%;
+}
+
+body {
+	padding-top: 1px;
+	min-height: 100%;
+	min-width: 440px;
+	background: #FFF;
+	background-size: 100% auto;
+	padding-bottom: 90px;
+}
+
+body, input, textarea, keygen, select, button, a, p {
+	font-family: 'Montserrat', sans-serif;
+	color: #2B3761;
+	font-size: 16px;
+	/*text-transform: uppercase;*/
+}
+
+.main-column {
+	/*padding: 1px 40px;*/ /* commented on 17-4-17 */
+	/*max-width: 960px;*/
+	margin: 0 auto;
+}
+
+button, .button {
+	display: block;
+	height: 43px;
+	line-height: 44px;
+	background-color: #FFDCB3;
+	text-align: center;
+	margin: 18px auto;
+	cursor: pointer;
+	transition: background-color 0.2s;
+	font-size: 13px;
+	letter-spacing: 0px;
+	border: none;
+	outline: none !important;
+	text-decoration: none;
+	width: 100%;
+}
+
+button.gray, .button.gray {
+	background-color: #8E929D;
+	color: #FFF;
+}
+
+button.disabled, .button.disabled {
+	background-color: #8E929D;
+	color: #FFF;
+	cursor: default;
+	pointer-events: none;
+}
+
+button:hover, .button:hover {
+	background-color: #FFCB8C;
+}
+
+button.gray:hover, .button.gray:hover {
+	background-color: #6D717C;
+}
+
+.round-button {
+	display: inline-block;
+	background-color: #0B1D4D;
+	text-align: center;
+	margin: 18px auto;
+	cursor: pointer;
+	transition: background-color 0.2s;
+	font-size: 13px;
+	letter-spacing: 0px;
+	border: none;
+	outline: none !important;
+	padding: 15px 30px;
+	border-radius: 999px;
+	color: #FFF;
+	text-decoration: none;
+	font-weight: normal;
+	width:85%;
+}
+
+.round-button:hover {
+	background-color: #102B72;
+}
+
+input[type=text], input[type=password] {
+	padding: 8px 2px;
+	background: transparent;
+	outline: none !important;
+	border: none;
+	border-bottom: 1px solid;
+	font-size: 12px;
+	display: block;
+	width: 100%;
+	margin: 18px 0;
+	transition: color 0.2s, opacity 0.2s;
+}
+
+.multi-line::after {
+	content: "";
+	clear: both;
+	display: block;
+	margin: 18px 0;
+}
+
+.multi-line input[type=text], .multi-line input[type=password], .multi-line .ui-selectmenu-button.ui-button {
+	width: auto;
+	margin: 0;
+	margin-right: 5%;
+	float: left;
+}
+
+.multi-line input[type=text]:last-child, .multi-line input[type=password]:last-child, .multi-line .ui-selectmenu-button.ui-button:last-child {
+	margin-right: 0;
+}
+
+.multi-line.halves > *:first-child, .multi-line.halves > *:nth-child(2) {
+	width: 48%;
+}
+
+.multi-line.halves > *:last-child {
+	width: 47%;
+}
+
+.no-transform {
+	text-transform: none !important;
+}
+
+.center-text {
+	text-align: center;
+}
+
+.nowrap {
+	white-space: nowrap;
+}
+
+.big-pink {
+	font-size: 50px;
+    color: #FE2593;
+}
+
+*::-webkit-input-placeholder { color: #2B3761; opacity:1; transition: color 0.2s, opacity 0.2s; }
+*:-moz-placeholder { color: #2B3761; opacity:1; transition: color 0.2s, opacity 0.2s; }
+*::-moz-placeholder { color: #2B3761; opacity:1; transition: color 0.2s, opacity 0.2s; }
+*:-ms-input-placeholder { color: #2B3761; opacity:1; transition: color 0.2s, opacity 0.2s; }
+*::placeholder { color: #2B3761; opacity:1;  }
+
+*:focus::-webkit-input-placeholder { color: #2B3761; opacity:0.6; }
+*:focus:-moz-placeholder { color: #2B3761; opacity:0.6; }
+*:focus::-moz-placeholder { color: #2B3761; opacity:0.6; }
+*:focus:-ms-input-placeholder { color: #2B3761; opacity:0.6; }
+*:focus::placeholder { color: #2B3761; opacity:0.6; }
+
+input[type=text].error, input[type=password].error {
+	color: #FE2593;
+	border-color: inherit;
+}
+
+input[type=text]:focus, input[type=password]:focus {
+	border-color: #667AAE;
+}
+
+.error::-webkit-input-placeholder { color: #FE2593; opacity:1; }
+.error:-moz-placeholder { color: #FE2593; opacity:1; }
+.error::-moz-placeholder { color: #FE2593; opacity:1; }
+.error:-ms-input-placeholder { color: #FE2593; opacity:1; }
+.error::placeholder { color: #FE2593; opacity:1; }
+
+body > footer {
+	display: block;
+	width: 100%;
+	height: 55px;
+	line-height: 55px;
+	border-top: 1px solid;
+	position: absolute;
+	bottom: 0;
+	overflow: hidden;
+	font-size: 12px;
+}
+
+body > footer > .main-column .left-side {
+	float: left;
+	display: block;
+	height: 100%;
+}
+	
+body > footer > .main-column .left-side a {
+	font-size: inherit;
+	text-decoration: none;
+	margin-right: 50px;
+	transition: color 0.2s;
+}
+
+body > footer > .main-column .left-side a:hover {
+	color: #667AAE;
+}
+
+body > footer > .main-column .right-side {
+	height: 100%;
+	float: right;
+}
+
+
+
+
+
+ul li {
+	text-transform: none;
+	font-size: 11px;
+	padding: 3px 0;
+	margin-left: 15px;
+	text-align: left;
+}
+
+ul li.no-bullet {
+	list-style-type: none;
+	margin-left: 0;
+}
+
+ul li.see-more {
+	list-style-type: none;
+	margin-left: 0;
+	cursor: pointer;
+	transition: color 0.2s;
+}
+
+ul li.see-more:hover {
+	color: #FE0086;
+}
+
+ul .see-more-content {
+	display: none;
+}
+
+ul.first-is-title > li:first-child {
+	list-style-type: none;
+	text-transform: uppercase;
+	font-size: 12px;
+	margin-left: 0;
+	background: none;
+}
+
+ul li small {
+	text-transform: uppercase;
+	font-size: 9px;
+}
+
+
+span.delete{
+	font-size: 10px;
+	color: #FE0086;
+	cursor: pointer;
+}
+
+span.delete:hover{
+	font-size: 10px;
+	color: #ff33a0;
+}
+
+
+.no-breaks {
+	white-space: nowrap;
+}
+
+@media only screen and (max-width: 650px) {
+	.no-mobile {
+		display: none !important;
+	}
+}
+
+@media only screen and (max-width: 430px) {
+	body > footer > .main-column .left-side {
+		float: none;
+		margin: 0 auto;
+		text-align: center;
+	}
+	body > footer > .main-column .left-side a {
+		margin: 0 25px;
+	}
+	body > footer > .main-column .right-side {
+		display: none;
+	}
+}

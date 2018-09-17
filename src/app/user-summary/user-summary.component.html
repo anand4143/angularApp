@@ -1,0 +1,142 @@
+<div class="wrapper">
+  <div class="row top-buffer">  
+    <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 text-center">        
+        <h5>CLICK ON THE INFORMATION OR ICONS BELOW TO UPDATE YOUR INFORMATION.</h5>  
+    </div>        
+  </div>
+  <div class="row top-buffer">
+    <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 text-center">
+      <div class="row data-area">
+         <div class="col-xs-6 col-sm-12 col-md-6 col-lg-4 data-box">
+             <div class="info-box" (click)="goToLocation('UI')">
+                <span>Personal<br/><br/></span>
+                <span class="wordwrap">{{personalInfo.User_First_Name}} {{personalInfo.User_Last_Name}}<br/></span>
+                <span class="wordwrap">{{personalInfo['Contact_Num']}}<br/></span>
+                <span class="wordwrap">{{personalInfo['Email_Address']}}</span> 
+             </div>
+         </div>
+         <!--<div class="col-xs-6 col-sm-12 col-md-6 col-lg-4 data-box">
+             <div [ngClass]="ssnInfoIncomplete ? 'incomplete-box' : 'info-box'" (click)="goToLocation('ADC')">
+                <span>SSN<br/><br/></span>
+                <span *ngIf="!ssnInfoIncomplete">{{ssnInfo.User_SSN}}</span> 
+                <span *ngIf="ssnInfoIncomplete"><i class="fa fa-times fa-3x"></i></span> 
+             </div>
+         </div>-->
+         <div class="col-xs-6 col-sm-12 col-md-6 col-lg-4 data-box" *ngIf="auth.isRenter()">
+             <div [ngClass]="empIncomplete ? 'incomplete-box' : 'info-box'" (click)="goToLocation('EMP')">
+                <span>Employment<br/><br/></span>
+                <span *ngIf="!empIncomplete">{{companyInfo['company.Company_Name']}}</span> 
+                <span *ngIf="empIncomplete"><i class="fa fa-times fa-3x"></i></span> 
+             </div>
+         </div>
+         <div class="col-xs-6 col-sm-12 col-md-6 col-lg-4 data-box" *ngIf="auth.isRenter()">
+             <!--<div class="info-box" [routerLink]="[auth.getRoute('/user/register-w2')]">-->
+             <div (click)="goToLocation('W2')" [ngClass]="!userInfo.isComplete('W2') ? 'incomplete-box' : 'info-box'">
+                <span>W2<br/><br/></span>
+                <span *ngIf="userInfo.isComplete('W2')"><i class="fa fa-check fa-3x"></i></span>
+                <span *ngIf="!userInfo.isComplete('W2')"><i class="fa fa-times fa-3x"></i></span>
+             </div>
+         </div>
+         
+         <div class="col-xs-6 col-sm-12 col-md-6 col-lg-4 data-box">
+            <div [ngClass]="!userInfo.isComplete('ID') ? 'incomplete-box' : 'info-box'" (click)="goToLocation('ID')">
+                <span>ID<br/><br/></span>           
+                <span *ngIf="userInfo.isComplete('ID')"><i class="fa fa-check fa-3x"></i></span>
+                <span *ngIf="!userInfo.isComplete('ID')"><i class="fa fa-times fa-3x"></i></span>
+            </div>
+         </div>
+         <div class="col-xs-6 col-sm-12 col-md-6 col-lg-4 data-box" *ngIf="auth.isRenter()">
+            <div (click)="goToLocation('PS')" [ngClass]="!(userInfo.isComplete('PS1') && userInfo.isComplete('PS2')) ? 'incomplete-box' : 'info-box'">
+                <span>Pay Stubs<br/><br/></span>           
+                <span *ngIf="(userInfo.isComplete('PS1') && userInfo.isComplete('PS2'))"><i class="fa fa-check fa-3x"></i></span>
+                <span *ngIf="!(userInfo.isComplete('PS1') && userInfo.isComplete('PS2'))"><i class="fa fa-times fa-3x"></i></span>
+            </div>
+         </div>
+         <div class="col-xs-6 col-sm-12 col-md-6 col-lg-4 data-box" *ngIf="auth.isRenter()">
+             <div (click)="goToLocation('BNKS')" [ngClass]="!(userInfo.isComplete('BS1') && userInfo.isComplete('BS2')) ? 'incomplete-box' : 'info-box'">
+                <span>Bank Statement<br/><br/></span>  
+                <span *ngIf="(userInfo.isComplete('BS1') && userInfo.isComplete('BS2'))"><i class="fa fa-check fa-3x"></i></span>
+                <span *ngIf="!(userInfo.isComplete('BS1') && userInfo.isComplete('BS2'))"><i class="fa fa-times fa-3x"></i></span>
+            </div>
+         </div>
+         <div class="col-xs-6 col-sm-12 col-md-6 col-lg-4 data-box" *ngIf="!auth.isRenter()">
+             <div (click)="goToLocation('BRKS')" [ngClass]="!userInfo.isComplete('BK') ? 'incomplete-box' : 'info-box'">
+                <span>Broker Statement<br/><br/></span>  
+                <span *ngIf="userInfo.isComplete('BK')"><i class="fa fa-check fa-3x"></i></span>
+                <span *ngIf="!userInfo.isComplete('BK')"><i class="fa fa-times fa-3x"></i></span>
+            </div>
+         </div>
+         
+         <div class="col-xs-6 col-sm-12 col-md-6 col-lg-4 data-box" *ngIf="auth.isRenter()">
+            <div [ngClass]="!userInfo.isComplete('CC') ? 'incomplete-box' : 'info-box'" (click)="goToLocation('CS')">
+                <span>Credit CHECK<br/><br/></span>
+               <span *ngIf="userInfo.isComplete('CC')"><i class="fa fa-check fa-3x"></i></span>
+               <span *ngIf="!userInfo.isComplete('CC')"><i class="fa fa-times fa-3x"></i></span>
+            </div>
+         </div>
+         <div class="col-xs-6 col-sm-12 col-md-6 col-lg-4 data-box" *ngIf="auth.isRenter()">
+             <div (click)="goToLocation('AC')" [ngClass]="!userInfo.isComplete('AC') ? 'incomplete-box' : 'info-box'">
+                <span>Address Check<br/><br/></span>  
+                <span *ngIf="userInfo.isComplete('AC')"><i class="fa fa-check fa-3x"></i></span>
+                <span *ngIf="!userInfo.isComplete('AC')"><i class="fa fa-times fa-3x"></i></span>
+            </div>
+         </div>
+         <div class="col-xs-6 col-sm-12 col-md-6 col-lg-4 data-box" *ngIf="auth.isRenter()">
+             <div (click)="goToLocation('BC')" [ngClass]="!userInfo.isComplete('BC') ? 'incomplete-box' : 'info-box'">
+                <span>Background Check<br/><br/></span>  
+                <span *ngIf="userInfo.isComplete('BC')"><i class="fa fa-check fa-3x"></i></span>
+                <span *ngIf="!userInfo.isComplete('BC')"><i class="fa fa-times fa-3x"></i></span>
+            </div>
+         </div>
+
+      </div>
+    
+        <!--<a [routerLink]="[auth.getRoute('register-user')]">
+            <span class="left">Personal:</span>
+            <span class="left">{{personalInfo.User_First_Name}} {{personalInfo.User_Last_Name}} / {{personalInfo['Contact_Num']}}</span>
+            <span class="right">/{{personalInfo['Email_Address']}} / ********</span>          
+        </a>
+        <a [routerLink]="[auth.getRoute('register-ssn')]">
+            <span class="left">SSN:</span>
+            <span class="right">{{ssnInfo.User_SSN}}</span>
+        </a>
+        <a *ngIf="auth.isRenter()" [routerLink]="['/user/register-employment']">
+            <span class="left">Employment:</span>
+            <span class="right">{{companyInfo['company.Company_Name']}}</span>
+        </a>
+        <a *ngIf="auth.isRenter()" [routerLink]="['/user/register-w2']">
+            <span class="left">W2:</span>
+            <span class="right" *ngIf="userInfo.isComplete('W2')">Complete</span>
+            <span class="right" *ngIf="!userInfo.isComplete('W2')">InComplete</span>
+        </a>
+        <a *ngIf="auth.isRenter()" [routerLink]="['/user/register-credit']">
+            <span class="left">Credit:</span>
+            <span class="right">Complete</span>
+        </a>                
+        <a [routerLink]="[auth.getRoute('register-identification')]">
+            <span class="left">ID:</span>            
+            <span class="right" *ngIf="userInfo.isComplete('ID')">Complete</span>
+            <span class="right" *ngIf="!userInfo.isComplete('ID')">InComplete</span>
+        </a>
+        <a *ngIf="auth.isRenter()" [routerLink]="['/user/register-pay']">
+            <span class="left">Pay Stubs:</span>            
+            <span class="right" *ngIf="userInfo.isComplete('PS')">Complete</span>
+            <span class="right" *ngIf="!userInfo.isComplete('PS')">InComplete</span>
+        </a>
+        <a *ngIf="auth.isRenter()" [routerLink]="['/user/register-bank']">
+            <span class="left">Bank Statement:</span>            
+            <span class="right" *ngIf="userInfo.isComplete('BS')">Complete</span>
+            <span class="right" *ngIf="!userInfo.isComplete('BS')">InComplete</span>
+            
+        </a>
+        <a *ngIf="!auth.isRenter()" [routerLink]="['/broker/register-brokerage']">
+            <span class="left">Broker Statement:</span>            
+            <span class="right" *ngIf="userInfo.isComplete('BK')">Complete</span>
+            <span class="right" *ngIf="!userInfo.isComplete('BK')">InComplete</span>
+        </a>-->
+        <button class="backbtn" type="button" (click)="gbf()"></button>
+    </div>
+  </div>
+</div>
+
+<!--<app-register-progress></app-register-progress>-->

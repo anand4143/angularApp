@@ -1,0 +1,41 @@
+<div class="columns">
+  <div class="col-side bordered">
+    <!-- Start user progress component-->
+    <app-sidebar></app-sidebar>
+    <!-- End user progress component-->
+  </div>
+  <div class="col gutter-left"  style="width:100%;">
+    <div class="top-bordered">
+      <div class="top-icons">
+        <app-user-progress></app-user-progress>
+      </div>
+      <div class="row top-buffer">
+        <div class="row top-buffer">
+          <div class="col-sm-6 col-sm-offset-3 text-center"><span> CLICK CHANGE TO EDIT YOUR PAYPAL ACCOUNT ID</span> </div>
+        </div>
+      <div class="row top-buffer">
+        <div class="col-sm-offset-2 col-sm-8 col-md-offset-3 col-md-6 ">
+         <div class="row">
+           <div class="col-sm-12 text-center">
+             {{paypalInfo}}
+           </div>          
+         </div>
+         <br>
+         <div class="row">
+            <div class="col-sm-12">
+               <button (click)="gotToContract()">Proceed With Payments</button>            
+            </div>
+         </div> 
+         <div class="row">
+            <div class="col-xs-3">
+              <button class="backbtn" type="button" (click)="gbf()"></button>                  
+            </div>
+            <div class="col-xs-9">
+              <button (click)="editPaypal()">Change</button>             
+            </div>
+          </div>        
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

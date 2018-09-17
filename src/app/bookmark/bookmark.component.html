@@ -1,0 +1,141 @@
+<div class="columns">
+  <div class="col-side bordered">
+    <app-sidebar></app-sidebar>
+  </div>
+  <div class="col gutter-left">
+    <div class="top-bordered">
+      <div class="top-icons">
+        <app-user-progress></app-user-progress>
+      </div>
+      <p class="intro">Add a bookmark by filling out the form below</p>
+      <form id="bookmark-form" [formGroup]="bookmarkForm" class="login-layout" method="post" (ngSubmit)="findListing()">
+        <!--<div class="multi-line">
+          <input id="search-box" name="locality" type="text" placeholder="STREET" style="width:70%;" class="address-form-autocomplete" chosen="0" [(ngModel)]="model.locality" 
+          [formControl]="bookmarkForm.controls['locality']"/>
+          <input name="unit" type="text" placeholder="APT #" style="width:25%;" [(ngModel)]="model.aptnumber" [formControl]="bookmarkForm.controls['aptnumber']"/>
+        </div>
+        <input name="city" type="text" placeholder="CITY" [(ngModel)]="model.city" [formControl]="bookmarkForm.controls['city']" readonly="readonly"
+        />
+        <div class="multi-line">
+          <input name="state" type="text" placeholder="STATE" style="width:60%;" [(ngModel)]="model.state" [formControl]="bookmarkForm.controls['state']" readonly="readonly"/>
+          <input name="zip" type="text" placeholder="ZIP" style="width:35%;"  [(ngModel)]="model.zipCode" [formControl]="bookmarkForm.controls['zip']" readonly="readonly" />
+        </div>
+        <div class="buttons">
+          <div class="spinner"></div>
+          <button class="savebtn" type="submit" [disabled]="!(latitute && longitude)" >Find Listings</button>
+        </div>-->
+        <div class="row">
+          <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-3">
+            <div class="row">
+              <div class="col-xs-9">
+                <div class="form-group">
+                  <input id="search-box" name="locality" type="text" placeholder="STREET" class="address-form-autocomplete" chosen="0" [(ngModel)]="model.locality"
+                    [formControl]="bookmarkForm.controls['locality']" />
+                </div>
+              </div>
+              <div class="col-xs-3">
+                <div class="form-group">
+                  <input name="unit" type="text" placeholder="APT #" [(ngModel)]="model.aptnumber" [formControl]="bookmarkForm.controls['aptnumber']"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-xs-12">
+                <div class="form-group">
+                  <input name="city" type="text" placeholder="CITY" [(ngModel)]="model.city" [formControl]="bookmarkForm.controls['city']"
+                    readonly="readonly" />
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-xs-9">
+                <div class="form-group">
+                  <input name="state" type="text" placeholder="STATE" [(ngModel)]="model.state" [formControl]="bookmarkForm.controls['state']"
+                    readonly="readonly" />
+                </div>
+              </div>
+              <div class="col-xs-3">
+                <div class="form-group">
+                  <input name="zip" type="text" placeholder="ZIP" [(ngModel)]="model.zipCode" [formControl]="bookmarkForm.controls['zip']"
+                    readonly="readonly" />
+                </div>
+              </div>
+            </div>
+
+            <div class="buttons">
+              <div class="spinner"></div>
+              <button class="savebtn" type="submit" [disabled]="!(latitute && longitude)">Find Listings</button>
+            </div>
+          </div>
+        </div>
+
+        <!--<div class="row">
+        <div class="col-xs-12 text-center">
+          <div class="form-group">
+             <div class="spinner"></div>
+            <div class="row">
+              <div class="col-xs-12">
+                 <button class="savebtn" type="submit" [disabled]="!(latitute && longitude)" >Find Listings</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>      -->
+      </form>
+
+      <div *ngIf="noBookmarkError" class="text-center">{{msg['TXT39']}}</div>
+      <div id="listing-results" *ngIf="noResult" class="text-center">No Result</div>
+      <div *ngIf="searchError" class="text-center error">Please try again</div>
+      <!--<my-spinner [isRunning]="isRequesting" *ngIf="bookmarkService.getPropertyCount() == 0" id = "loading"></my-spinner> -->
+      <div id="listing-results" *ngIf="bookmarkService.getPropertyCount() != 0">
+        <p class="intro" id="pList">Listing Results</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Address</th>
+              <th>Unit Num.</th>
+            </tr>
+          </thead>
+          <tbody *ngFor="let property of bookmarkService.getProperties(pageNum)">
+            <tr (click)="markSelect(property)" [ngClass]={selected:isSelectedProperty(property)}>
+              <td>{{property.street_address}},&nbsp;{{property.building.city }}&nbsp;-&nbsp;{{property.building.postal_code}}</td>
+              <td>{{property.unit_number}}</td>
+            </tr>
+          </tbody>
+        </table>
+        <!--<my-spinner [isRunning]="isRequesting"></my-spinner>-->
+        <!--<div class="buttons">
+          <button [ngClass]={disabled:!selectedProp} (click)="addNewBookmark()">Choose this listing!</button>
+        </div>-->
+        <!-- pager -->
+        <div class="text-center" *ngIf="bookmarkService.getPropertyCount() != 0">
+          <ul *ngIf="pager.pages.length" class="pagination">
+            <li [ngClass]="{disabled:pager.currentPage === 1}">
+              <a (click)="setPage(1)"><span class="rspan glyphicon glyphicon-step-backward"></span></a>
+            </li>
+            <li [ngClass]="{disabled:pager.currentPage === 1}">
+              <a (click)="setPage(pager.currentPage - 1)"><span class="rspan glyphicon glyphicon-triangle-left"></span></a>
+            </li>
+            <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+              <a (click)="setPage(page)">{{page}}</a>
+            </li>
+            <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+              <a (click)="setPage(pager.currentPage + 1)"><span class="rspan glyphicon glyphicon-triangle-right"></span></a>
+            </li>
+            <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+              <a (click)="setPage(pager.totalPages)"><span class="rspan glyphicon glyphicon-step-forward"></span></a>
+            </li>
+          </ul>
+        </div>
+        <!-- pager -->
+      </div>
+      <!--<div class="map-container">
+        <img src="/assets/temp/demo-map.png" style="width:100%;max-width:610px;height:auto;display:block;margin:0 auto;" />
+      </div>-->
+    </div>
+  </div>
+</div>

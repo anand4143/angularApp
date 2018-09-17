@@ -1,0 +1,56 @@
+<form>
+ <div class="row top-buffer">  
+      <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 text-center">  
+        <h4>ADDRESS CHECK</h4>
+    </div>        
+  </div>
+  
+  <div class="row top-buffer">  
+     <div class="col-md-8 col-md-offset-2 text-center"> 
+        <div class="row">
+            <div class="col-sm-12 text-center">
+              <div class="row">
+                 <div class="col-sm-offset-2 col-sm-8 pad-l0">
+                  <input type="radio" name="Gender"  [(ngModel)]="addCheckMdl.User_Gender" value="M" [formControl]="addCheckFrm.controls['Gender']" >Male &nbsp;&nbsp;
+                  <input type="radio" name="Gender" [(ngModel)]="addCheckMdl.User_Gender" value="F" [formControl]="addCheckFrm.controls['Gender']" >Female
+                  <div class="error text-center" *ngIf="addCheckFrm.controls['Gender'].touched && addCheckFrm.controls['Gender'].hasError('required')">Gender is required.</div>
+                </div>
+              </div>
+            </div>             
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12 text-center">
+              <div class="row">
+                 <div class="col-sm-offset-2 col-sm-8 pad-l0">
+                  <button (click)="checkSSN()" class="round-button adjust-height" [disabled]="addressService.getSSNStatus() || !addCheckFrm.valid">RUN ADDRESS CHECK</button>
+                </div>
+              </div>
+              <div class="row">
+                  <div *ngIf="addressService.getSSNRecord()">          
+                    <div *ngIf="addressService.getSSNStatus()">Generated on {{addressService.ssnRecord.Identity_Info_Creation_Date | date:'MM/dd/yyyy'}}
+                      <a (click)="openNewWindow()" class="report-style">view report</a>
+                    </div>
+                    <div *ngIf="!addressService.getSSNStatus()">Expired on {{addressService.ssnRecord.Identity_Info_Expiry_Date | date:'MM/dd/yyyy'}} </div>                
+                  </div>
+              </div>          
+            </div>             
+        </div>
+          <div class="row">
+            <div class="col-sm-12 text-center">
+              <div class="form-group buttons">
+                <div class="row">
+                   <div class="col-xs-8 col-sm-offset-2">
+                    <button class="backbtn" type="button" (click)="gbf()"></button>                 
+                  </div>
+                  <div class="col-xs-10 col-sm-6">
+                     <div *ngIf="error.length != 0" class="error text-center">{{error}}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+    </div>        
+  </div>
+</form>
+<app-register-progress></app-register-progress>

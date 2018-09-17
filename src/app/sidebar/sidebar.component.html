@@ -1,0 +1,66 @@
+<div *ngIf="!addListLink" class="row">
+  <a style="width:44%;"  (click) = "setClientListing()"
+  [ngClass] = "{sidebarmenus: bookmarkService.getClientButtonStatus()}">Clients</a>
+  <a style="width:56%;"   (click) = "resetClientListing()"
+  [ngClass] = "{sidebarmenus: !bookmarkService.getClientButtonStatus()}">Listings</a>
+</div>
+
+<div>
+  <div *ngIf="!addListLink" class="row no-border"><br/></div>
+  <div class="row">
+    <div [ngClass]="{'lower-sidebar-menu' : !addListLink}">
+      <!--<a  class="sidebar-menus"  [routerLink]="['base']" *ngIf="addListLink" style="width:44%;"  (click) = "setHistoryList()">History</a>-->
+      <a *ngIf="addListLink" style="width:44%;"   (click) = "setHistory()" 
+      [ngClass] = "{sidebarmenus: !bookmarkService.getSideBarStatus(), sidebarDisabledMenus : !bookmarkService.getHistorycount()}" >History</a>
+      <a *ngIf="addListLink" style="width:56%;"  (click) = "setBookmarkList()"
+      [ngClass] = "{'sidebarmenus' : bookmarkService.getSideBarStatus(), 'sidebarDisabledMenus' : bookmarkService.getBookmarkCount() == 0}">Listings</a>
+      <a *ngIf="landlordLinks" style="width:44%;"    
+      [ngClass] = "{sidebarmenus: !bookmarkService.getSideBarStatus()}">Leased</a>
+      <a *ngIf="landlordLinks" style="width:56%;"    
+      [ngClass] = "{sidebarmenus: bookmarkService.getSideBarStatus()}">On Market</a>
+      <a *ngIf="brokerLinks" style="width:44%;"   (click) = "getClosedApplications()" 
+      [ngClass] = "{sidebarmenus: !bookmarkService.getSideBarStatus()}">Closed</a>
+      <a *ngIf="brokerLinks" style="width:56%;"   (click) = "getCurrentApplications()" 
+      [ngClass] = "{sidebarmenus: bookmarkService.getSideBarStatus()}">Current</a>
+    </div>
+  </div>
+
+<!--<a [routerLink]="['base']" *ngIf="brokerLinks">+ Pending Clients</a>-->
+<!--<a [routerLink]="['/user/bookmark']" *ngIf="addListLink" id="addList">+ Add a Listing</a>-->
+<a (click)="searchProperties()" *ngIf="addListLink" id="addList">+ Add a Listing</a>
+
+<!-- Insert Star on Hover -->
+
+<!--<a>Address </a>-->
+
+<div class="bookmark-list"> 
+  <!-- Insert Star and Delete button on Hover -->
+  <!--*ngIf="this.bookmarkService.isCurrentBookmarkId()" -->
+  <a *ngFor="let item of bookmarkService.getBookmarkList()" class="bookmark" [ngClass]="{active:bookmarkService.isCurrentBookmark(item)}" (click)="goToProperty(item)">
+    <svg class="fav-star" *ngIf="addListLink && bookmarkService.getSideBarStatus()" [ngClass]="{favorited : item.Bookmark_Priority}" viewBox="0 0 16 16" width="16px" height="16px" (click)="setPriorityOfBookmark(item.Bookmark_ID, item.Bookmark_Priority)">
+      <path d="M 8 3 L 9.6996 6.2918 L 13.5 6.8197 L 10.75 9.382 L 11.3992 13 L 8 11.2918 L 4.6008 13 L 5.25 9.382 L 2.5 6.8197 L 6.3004 6.2918 L 8 3 Z"
+        stroke="#4d524e" stroke-width="1" fill="#4d524e">
+      </path>
+    </svg> 
+
+    <span *ngIf="!bookmarkService.getClientButtonStatus()"> {{item.Property_Address}}<br> {{item.Property_Unit_Number}}
+    <br>{{item.Property_City }}&nbsp;-&nbsp;{{item.Property_Postal_Code}}</span>
+    <span *ngIf="bookmarkService.getClientButtonStatus()"><i class="fa fa-user-circle fa-3x"></i>&nbsp;&nbsp;{{item.Renter_First_Name}}&nbsp;{{item.Renter_Last_Name}}</span>
+
+    <svg class="trash-can" *ngIf="addListLink" viewBox="0 0 16 16" width="16px" height="16px" (click)="removeSidebarItem(item)">
+      <g>
+        <g>
+          <path d="M 4 4 L 5 4 L 5 12 L 4 12 L 4 4 Z" fill="#52554f"></path>
+          <path d="M 6 4 L 7 4 L 7 11 L 6 11 L 6 4 Z" fill="#52554f"></path>
+          <path d="M 8 4 L 9 4 L 9 11 L 8 11 L 8 4 Z" fill="#52554f"></path>
+          <path d="M 10 4 L 11 4 L 11 12 L 10 12 L 10 4 Z" fill="#52554f"></path>
+          <path d="M 5 11 L 10 11 L 10 12 L 5 12 L 5 11 Z" fill="#52554f"></path>
+          <path d="M 3 4 L 12 4 L 12 5 L 3 5 L 3 4 Z" fill="#52554f"></path>
+          <path d="M 6 3 L 9 3 L 9 4 L 6 4 L 6 3 Z" fill="#52554f"></path>
+        </g>
+      </g>
+    </svg>
+  </a>
+</div>
+<!--</div>-->
+

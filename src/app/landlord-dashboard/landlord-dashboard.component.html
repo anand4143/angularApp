@@ -1,0 +1,50 @@
+<div class="columns">
+  <div class="col-side bordered">
+    <app-sidebar></app-sidebar>
+  </div>
+  <div class="col gutter-left"  style="width:100%;">
+    <div class="top-bordered"> 
+      <div class="top-icons">
+        <app-user-progress></app-user-progress>
+      </div>      
+      <header class="row title-btns-split">
+        <div class="col-xs-12 col-sm-5 col-md-6 col-lg-7">
+          <div *ngIf="!bkmrkSrv.getClientButtonStatus()"><h1 *ngFor="let address of bkmrkSrv.getAddressArray()">{{address}}</h1></div>
+          <div *ngIf="bkmrkSrv.getClientButtonStatus()"><h1 *ngFor="let renter of bkmrkSrv.getRenterDetails()">{{renter}}</h1></div>
+        </div>
+        <div class="col-xs-12 col-sm-7 col-md-6 col-lg-5">
+            <a class="button" [routerLink]="[auth.getRoute('home')]">View Applications </a>
+            <a class="button">View Leased Contracts</a>
+        </div>
+      </header>
+        <table *ngIf="!bkmrkSrv.getClientButtonStatus()">
+          <tbody *ngFor="let item of bkmrkAppSrv.getApplicationsList()">           
+            <tr (click)="gotoDetails(item)">
+              <td class="wid-10"><i class="fa fa-user-circle fa-3x"></i></td> 
+              <td>{{item.Renter_First_Name}}&nbsp;{{item.Renter_Last_Name}}&nbsp;represented by {{item.Broker_First_Name}}&nbsp;{{item.Broker_Last_Name}}&nbsp;
+                <span *ngIf="item.Bookmark_Application_Status < constants.bookmarkApplicationStatus.acceptedLandlord">In Process with Broker&nbsp;</span>
+                <span *ngIf="item.Bookmark_Application_Status == constants.bookmarkApplicationStatus.acceptedLandlord">To Be approved&nbsp;</span>
+                <span *ngIf="item.Bookmark_Application_Status == constants.bookmarkApplicationStatus.approvedLandlord">In Leasing Process&nbsp;</span>
+                <span *ngIf="item.Bookmark_Application_Status == constants.bookmarkApplicationStatus.leased">Leased&nbsp;</span>as on&nbsp;
+                <span>{{item.Bookmark_Application_Modification_Date | date:'MM/dd/yyyy'}}</span>
+              </td> 
+            </tr>
+          </tbody>
+        </table>  
+        <table *ngIf="bkmrkSrv.getClientButtonStatus()">
+          <tbody *ngFor="let item of bkmrkAppSrv.getApplicationsList()">           
+            <tr (click)="gotoDetails(item)">
+              <td class="wid-10"><i class="fa fa-user-circle fa-3x"></i></td> 
+              <td>{{item.Property_Unit_Number}},&nbsp;{{item.Property_Address}},&nbsp;{{item.Property_City}}&nbsp;
+                <span *ngIf="item.Bookmark_Application_Status < constants.bookmarkApplicationStatus.acceptedLandlord">In Process with Broker&nbsp;</span>
+                <span *ngIf="item.Bookmark_Application_Status == constants.bookmarkApplicationStatus.acceptedLandlord">To Be approved&nbsp;</span>
+                <span *ngIf="item.Bookmark_Application_Status == constants.bookmarkApplicationStatus.approvedLandlord">In Leasing Process&nbsp;</span>
+                <span *ngIf="item.Bookmark_Application_Status == constants.bookmarkApplicationStatus.leased">Leased&nbsp;</span>as on&nbsp;
+                <span>{{item.Bookmark_Application_Modification_Date | date:'MM/dd/yyyy'}}</span>
+              </td> 
+            </tr>
+          </tbody>
+        </table>     
+    </div>
+  </div>
+</div>

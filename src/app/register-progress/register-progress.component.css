@@ -1,0 +1,14 @@
+.register-progress .node.active p{
+	color: #D98055;
+	opacity: 1;
+}
+
+.register-progress .node.skipped p{
+	color: #FE2593;
+	opacity: 1;
+}
+
+.register-progress > .inner {
+    width: auto;
+    display: inline-block;
+}

@@ -1,0 +1,1 @@
+export * from './register-w2.component';

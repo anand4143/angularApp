@@ -1,0 +1,102 @@
+
+<form [formGroup]="rgempFrm" (ngSubmit)="saveEmpData()" autocomplete="off">
+
+  <div class="row top-buffer">  
+      <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 text-center"> 
+        <h4>EMPLOYMENT</h4>       
+        <!--<h5>WE DON'T LIKE BEING NEW EITHER. ANSWER A FEW QUESTIONS FOR US SO WE CAN GET YOU RENTING YOUR APARTMENT.</h5>          -->
+    </div>        
+  </div>
+  
+  <div class="row top-buffer">  
+      <div class="col-md-8 col-md-offset-2 text-center"> 
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                <div class="row">
+                    <div class="col-sm-offset-2 col-sm-8 pad-l0">
+                        <select class="selectpicker selEmplyee" id="file-upload" name="EmploymentOption" [(ngModel)]="rgempnMdl.EmploymentOption" [formControl]="rgempFrm.controls['EmploymentOption']" (change)="empOptionChange()" >
+                            <option value="0" disabled> Select From List</option>
+                            <option *ngFor="let option of options" value="{{option.value}}"> 
+                            {{option.text}}
+                            </option>                 
+                        </select>
+                        <div class="error text-center" *ngIf="rgempFrm.controls['EmploymentOption'].touched && rgempFrm.controls['EmploymentOption'].hasError('required')">form list is required.</div>
+                    </div>
+                </div>
+            </div>
+        </div> 
+
+        <div *ngIf="rgempnMdl.EmploymentOption == 2 ">          
+          <div class="row">
+            <div class="col-sm-12 text-center">
+                <div class="row">
+                  <div class= "col-sm-offset-2 col-sm-8 pad-l0">
+                    <input type="text" name="Company_Name" placeholder="Company Name" [(ngModel)]="rgempnMdl.Company_Name" [formControl]="rgempFrm.controls['Company_Name']" >
+                    <div class="error text-center" *ngIf="rgempFrm.controls['Company_Name'].touched && rgempFrm.controls['Company_Name'].hasError('required')">
+                      Company Name is required.</div>
+                    
+                  </div>
+                  <div class= "col-sm-offset-2 col-sm-8 pad-l0">
+                    <input type="text" name="Company_City" placeholder="City" [(ngModel)]="rgempnMdl.Company_City" [formControl]="rgempFrm.controls['Company_City']"  >
+                    <div class="error text-center" *ngIf="rgempFrm.controls['Company_City'].touched && rgempFrm.controls['Company_City'].hasError('required')">Company City is required.</div>
+                  <div class="error text-center" *ngIf="rgempFrm.controls['Company_City'].touched && !rgempFrm.controls['Company_City'].valid && !rgempFrm.controls['Company_City'].hasError('required')">Enter a valid company city</div>
+                  </div>
+                  <div class= "col-sm-offset-2 col-sm-8 pad-l0">
+                    <input type="text" name="Company_Region" [maxlength] = "3" placeholder="State" [(ngModel)]="rgempnMdl.Company_Region" [formControl]="rgempFrm.controls['Company_Region']" >
+                    <div class="error text-center" *ngIf="rgempFrm.controls['Company_Region'].touched && rgempFrm.controls['Company_Region'].hasError('required')">Company Region is required.</div>
+                    <div class="error text-center" *ngIf="rgempFrm.controls['Company_Region'].touched && !rgempFrm.controls['Company_Region'].valid && !rgempFrm.controls['Company_Region'].hasError('required')">Enter a valid company region</div>
+                  </div>
+                  <div class= "col-sm-offset-2 col-sm-8 pad-l0">
+                    <input type="text" name="Company_Country" placeholder="Country" [(ngModel)]="rgempnMdl.Company_Country" [formControl]="rgempFrm.controls['Company_Country']" >
+                    <div class="error text-center" *ngIf="rgempFrm.controls['Company_Country'].touched && rgempFrm.controls['Company_Country'].hasError('required')">Company Country is required.</div>
+                    <div class="error text-center" *ngIf="rgempFrm.controls['Company_Country'].touched && !rgempFrm.controls['Company_Country'].valid && !rgempFrm.controls['Company_Country'].hasError('required')">Enter a valid company country</div>
+                  </div>
+                </div>  
+            </div>                      
+          </div>
+          <div class="form-group">
+            <div class="row" *ngIf="errorVar">
+              <div class="col-sm-12">
+                <div class="error text-center">{{errorMsg}}</div>
+              </div>
+            </div>
+          </div> 
+          <div class="row">
+            <div class="col-sm-12 text-center">
+              <div class="form-group buttons">
+                <div class="row">
+                  <div class="col-xs-2  col-sm-offset-2 pad-l0">
+                    <button class="backbtn" type="button" (click)="gbf()"></button>                 
+                  </div>
+                  <div class="col-xs-10 col-sm-6">
+                    <button type="submit" type="submit" [disabled]="!rgempFrm.valid" >Save</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>        
+        </div>
+        
+        <div *ngIf="rgempnMdl.EmploymentOption != 2 ">
+          <br>
+          <div class="row" *ngIf="currentEmp">
+              <div *ngFor="let emp of emps">
+                  <label>{{emp["company.Company_Name"]}}</label><br>
+              </div>           
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-sm-12 text-center">
+                <div class="row">
+                    <div class="col-sm-offset-2 col-sm-8 pad-l0">
+                        <button class="backbtn" type="button" (click)="gbf()"></button>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>        
+    </div>        
+  </div>  
+</form>
+
+<app-register-progress></app-register-progress>

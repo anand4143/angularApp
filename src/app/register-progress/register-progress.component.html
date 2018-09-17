@@ -1,0 +1,84 @@
+<!--<div class="row">
+    <div class="col-sm-12 text-center">
+        <div class="register-progress">    
+            <div class="inner">
+                <a [routerLink]="[auth.getRoute('register-user')]" class="node" [ngClass]="{completed:isComplete('PER'), active: checkRoute('user'), skipped:isSkipped('PER', 'PER')}">
+                    <div class="icon text"></div>
+                    <div class="label">
+                        <p>Personal<br>Information</p>
+                    </div>
+                </a>
+                <div class="connector"></div>
+                <a [routerLink]="[auth.getRoute('register-ssn')]" class="node" [ngClass]="{active: checkRoute('ssn'),completed:isComplete('SSN'), skipped:isSkipped('ssn', 'SSN')}">
+                    <div class="icon text"></div>
+                    <div class="label">
+                        <p>Social<br>Security</p>
+                    </div>
+                </a>
+                <div *ngIf="auth.isRenter()" class="connector"></div>
+                <a *ngIf="auth.isRenter()" [routerLink]="['/user/register-employment']" class="node" [ngClass]="{active: checkRoute('employment'),completed:isComplete('EMP'), skipped:isSkipped('employment', 'EMP')}">
+                    <div class="icon text"></div>
+                    <div class="label">
+                        <p>Employment</p>
+                    </div>
+                </a>
+                <div *ngIf="auth.isRenter()" class="connector"></div>
+                <a *ngIf="auth.isRenter()" [routerLink]="['/user/register-w2']" class="node" [ngClass]="{active: checkRoute('w2'),completed:isComplete('W2'), skipped:isSkipped('w2', 'W2')}">
+                    <div class="icon text"></div>
+                    <div class="label">
+                        <p>W2</p>
+                    </div>
+                </a>        
+                <div class="connector"></div>
+                <a [routerLink]="[auth.getRoute('register-identification')]" class="node" [ngClass]="{active: checkRoute('identification'),completed:isComplete('ID'), skipped:isSkipped('identification', 'ID')}">
+                    <div class="icon docs"></div>
+                    <div class="label">
+                        <p>Identification</p>
+                    </div>
+                </a>
+                <div *ngIf="auth.isRenter()" class="connector"></div>
+                <a *ngIf="auth.isRenter()" [routerLink]="['/user/register-pay']" class="node" [ngClass]="{active: checkRoute('pay'),completed:isComplete('PS'), skipped:isSkipped('pay', 'PS')}">
+                    <div class="icon docs"></div>
+                    <div class="label">
+                        <p>Pay<br>Stubs</p>
+                    </div>
+                </a>
+                <div *ngIf="auth.isRenter()" class="connector"></div>
+                <a *ngIf="auth.isRenter()" [routerLink]="['/user/register-bank']" class="node" [ngClass]="{active: checkRoute('bank'),completed:isComplete('BS'), skipped:isSkipped('bank', 'BS')}">
+                    <div class="icon docs"></div>
+                    <div class="label">
+                        <p>Bank<br>Statement</p>
+                    </div>
+                </a>
+                <div *ngIf="!auth.isRenter()" class="connector"></div>
+                <a *ngIf="!auth.isRenter()" [routerLink]="['/broker/register-brokerage']" class="node" [ngClass]="{active: checkRoute('brokerage'),completed:isComplete('BK'), skipped:isSkipped('brokerage', 'BK')}">
+                    <div class="icon docs"></div>
+                    <div class="label">
+                        <p>Brokerage<br>Account</p>
+                    </div>
+                </a>
+                <div *ngIf="auth.isRenter()" class="connector"></div>
+                <a *ngIf="auth.isRenter()" [routerLink]="['/user/register-credit']" class="node" [ngClass]="{active: checkRoute('credit'),completed:isComplete('CC'), skipped:isSkipped('credit', 'CC')}">
+                    <div class="icon check"></div>
+                    <div class="label">
+                        <p>Credit<br>Check</p>
+                    </div>
+                </a>
+                <div *ngIf="auth.isRenter()" class="connector"></div>
+                <a *ngIf="auth.isRenter()" [routerLink]="['/user/address-check']" class="node" [ngClass]="{active: checkRoute('address'),completed:isComplete('AC'), skipped:isSkipped('credit', 'AC')}">
+                    <div class="icon check"></div>
+                    <div class="label">
+                        <p>Address<br>Check</p>
+                    </div>
+                </a>
+                <div *ngIf="auth.isRenter()" class="connector"></div>
+                <a *ngIf="auth.isRenter()" [routerLink]="['/user/background-check']" class="node" [ngClass]="{active: checkRoute('background'),completed:isComplete('BC'), skipped:isSkipped('credit', 'BC')}">
+                    <div class="icon check"></div>
+                    <div class="label">
+                        <p>Background<br>Check</p>
+                    </div>
+                </a>        
+            </div>
+        </div>
+    </div>
+</div>-->

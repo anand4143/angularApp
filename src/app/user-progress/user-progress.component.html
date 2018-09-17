@@ -1,0 +1,11 @@
+  <!--<span *ngIf="userRole" class="top-icon bookmark completed" [routerLink]="[auth.getRoute('bookmark')]">Bookmark</span>
+  <span class="top-icon apply completed" *ngIf="bkmSrv.getCurrentBookmark()" [routerLink]="[auth.getRoute('home')]" 
+    [ngClass]="{active: checkRoute('home')}">Apply</span>
+  <span class="top-icon approval" *ngIf="bkmSrv.getCurrentBookmark()" (click)='gotoApplication()' 
+    [ngClass]="{active: checkRoute('apply'), 
+                completed: checkApprovalStatus(constants.bookmarkApplicationStatus.acceptedBroker), 
+                'disable-click': checkDisabledStatus(constants.bookmarkStatus.inProcess)}">Approval</span>
+  <span class="top-icon payment"  *ngIf="bkmSrv.getCurrentBookmark()" (click)='gotoPayments()'
+    [ngClass]="{active: checkRoute('payment'),
+                completed: checkApprovalStatus(constants.bookmarkApplicationStatus.acceptedLandlord), 
+                'disable-click': !bkmSrv.getPaymentEnabled()}">Payment</span>-->

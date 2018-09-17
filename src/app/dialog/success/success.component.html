@@ -1,0 +1,27 @@
+<div class="modal-content" (keyup)="keyUp($event)">
+  <div class="modal-header">                     
+    <h3 class="modal-title">
+      <!--<span class="pull-right" (click)="close()"><i class="fa fa-times fa-lg" aria-hidden="true"></i></span>-->
+      <span class="pull-left">{{title}}</span>
+    </h3>
+  </div>
+  <div *ngIf="!message.QuestionText" class="modal-body">
+    {{message}}        
+  </div>
+
+  <div *ngIf="message.QuestionText" class="modal-body">
+    {{message.QuestionText}}  <br/>    
+    <ul class="row" *ngFor="let choice of message.QuestionSelect.QuestionChoice ; let i = index">
+      <div class="col-xs-8 col-sm-offset-2"><input type="radio" name="{{choice}}" [(ngModel)] = "answer" value="{{i+1}}" />&nbsp;{{choice}}</div>
+    </ul>     
+  </div>
+
+  <div class="row modal-footer">
+    <div class="col-xs-12">
+      <button *ngIf="!message.QuestionText"  #closeButton type="button" class="button" (click)="byebye()">Close</button>
+      <button *ngIf="message.QuestionText"  type="button" [disabled]="!answer" class="button" (click)="sendAns(answer)">Next</button>
+      <div class="text-center" *ngIf="message.QuestionText">{{message.current}}/{{message.total}}</div>
+    </div>                  
+  </div>
+  <div class="row modal-footer"></div>
+</div>

@@ -1,0 +1,198 @@
+<form [formGroup]="rgFrm" (ngSubmit)="registerUser()">
+
+  <div *ngIf="!auth.isLoggedIn()" class="row top-buffer">  
+      <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 text-center">        
+        <h5>WE DON'T LIKE BEING NEW EITHER. ANSWER A FEW QUESTIONS FOR US SO WE CAN GET YOU RENTING YOUR APARTMENT.</h5>  
+    </div>        
+  </div>
+
+  <div class="row top-buffer">
+    <div class="col-md-8 col-md-offset-2">
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <input type="text" id="User_First_Name" name="User_First_Name" minlength="2" maxlength="33" placeholder="FIRST NAME" [(ngModel)]="rgMdl.User_First_Name"  [formControl]="rgFrm.controls['User_First_Name']" readonly>
+              <div class="error text-center" *ngIf="rgFrm.controls['User_First_Name'].touched && rgFrm.controls['User_First_Name'].hasError('required')">First Name is required.</div>
+              <div class="error text-center" *ngIf="rgFrm.controls['User_First_Name'].touched && rgFrm.controls['User_First_Name'].hasError('minlength')">First Name should be atleast 2 characters.</div>
+              <div class="error text-center" *ngIf="rgFrm.controls['User_First_Name'].touched && rgFrm.controls['User_First_Name'].hasError('maxlength')">First Name should be max 32 characters.</div>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <input type="text" id="User_Last_Name" readonly name="User_Last_Name" placeholder="LAST NAME"  [(ngModel)]="rgMdl.User_Last_Name" [formControl]="rgFrm.controls['User_Last_Name']">
+            <div class="error text-center" *ngIf="rgFrm.controls['User_Last_Name'].touched && rgFrm.controls['User_Last_Name'].hasError('required')">Last Name is required.</div>
+            <div class="error text-center" *ngIf="rgFrm.controls['User_Last_Name'].touched && rgFrm.controls['User_Last_Name'].hasError('minlength')">Last Name should be atleast 2 characters.</div>
+            <div class="error text-center" *ngIf="rgFrm.controls['User_Last_Name'].hasError('maxlength') && rgFrm.controls['User_Last_Name'].touched">Last Name should be max 32 characters.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <input type="text" id="Email.Email_Address" name="Email.Email_Address" placeholder="EMAIL ADDRESS"  [(ngModel)]="rgMdl['Email.Email_Address']"  [formControl]="rgFrm.controls['Email.Email_Address']" validateEmail readonly>        
+            <div  class="error text-center" *ngIf="rgFrm.controls['Email.Email_Address'].touched && rgFrm.controls['Email.Email_Address'].hasError('required')">e-Mail is required.</div>
+            <div class="error text-center"  *ngIf="rgFrm.controls['Email.Email_Address'].touched && !rgFrm.controls['Email.Email_Address'].valid && !rgFrm.controls['Email.Email_Address'].hasError('required')">Enter a valid e-Mail</div>
+          </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+              <input type="text" id="Contact.Contact_Num" name="Contact.Contact_Num" placeholder="PHONE NUMBER" [ngModel]="rgMdl['Contact.Contact_Num'] | phonenumber" (ngModelChange)="rgMdl['Contact.Contact_Num']=$event" [formControl]="rgFrm.controls['Contact.Contact_Num']" 
+              validatePhone OnlyNumber="true" limit-to="12">              
+              <div class="error text-center" *ngIf="rgFrm.controls['Contact.Contact_Num'].touched && rgFrm.controls['Contact.Contact_Num'].hasError('required')">Phone number is required.</div>
+              <div class="error text-center" *ngIf="rgFrm.controls['Contact.Contact_Num'].touched && !rgFrm.controls['Contact.Contact_Num'].valid && !rgFrm.controls['Contact.Contact_Num'].hasError('required')">Enter a valid phone number</div>
+              <div class="error text-center" *ngIf="errorType =='Phone'">{{errorMessage}}</div>
+            </div>
+        </div>
+      </div>
+       <!--<div class="row">
+        <div class="col-sm-6">
+          <div class="row text-left">
+              <input type="radio" name="Gender" [(ngModel)]="rgMdl.User_Gender" value="M" [formControl]="rgFrm.controls['Gender']" > Male 
+              &nbsp;&nbsp; <input type="radio" name="Gender" [(ngModel)]="rgMdl.User_Gender" value="F" [formControl]="rgFrm.controls['Gender']" > Female
+              <div class="error text-center" *ngIf="rgFrm.controls['Gender'].touched && rgFrm.controls['Gender'].hasError('required')">Gender is required.</div>
+          </div>
+        </div>
+        <div class="col-sm-6">
+            <div *ngIf="auth.isLoggedIn()" >
+              <div class="row">
+                <div class="col-sm-12 text-right">
+                <a  (click)="changePassword()"><u>Change My Password</u></a>
+                </div>
+              </div>
+          </div>
+        </div>
+       </div>-->
+
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <input type="text" id="User_SSN" name="User_SSN" placeholder="SOCIAL SECURITY NUMBER" OnlyNumber="true" limit-to="11" (change)="display()"
+            [ngModel]="rgMdl.User_SSN | ssn" (ngModelChange)="rgMdl.User_SSN=$event" [formControl]="rgFrm.controls['User_SSN']" >
+            <div class="error text-center" *ngIf="rgFrm.controls['User_SSN'].touched && rgFrm.controls['User_SSN'].hasError('required')">social security number is required.</div>
+            <div class="error text-center" *ngIf="rgFrm.controls['User_SSN'].touched && !rgFrm.controls['User_SSN'].valid && rgFrm.controls['User_SSN'].hasError('pattern')">Invalid social security number</div>
+            <div class="error text-center" *ngIf="rgFrm.controls['User_SSN'].touched && error">{{error}}</div>
+          </div>
+        </div>  
+        <div class="col-sm-6 ">
+         <div class="form-group margin-adjust">
+           <!--<my-date-picker placeholder="MM/DD/YYYY [ Birthday ]" OnlyNumber="true" [options]="myDatePickerOptions" [selDate]="selBirthday" (dateChanged)="onFromDateChanged($event)" ></my-date-picker> -->
+           <input type="date" max="9999-12-31" (focus)="focusFunction($event)" (focusout)="outFocusFunction($event)"  name="User_DOB" placeholder="Birthday" data-date-format="MM DD YYYY" [(ngModel)]="rgMdl.User_DOB" [formControl]="rgFrm.controls['User_DOB']">
+           <div class="error text-center" *ngIf="rgFrm.controls['User_DOB'].touched && rgFrm.controls['User_DOB'].hasError('required')">birthday date is required.</div>
+            <div class="error text-center" *ngIf="rgFrm.controls['User_DOB'].touched && error">{{error}}</div>
+            <div class="error text-center">{{vmsg}}</div>  
+          </div>
+        </div> 
+      </div>
+
+
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <input type="text" id="search-box" name="Address_2" placeholder="STREET ADDRESS" [(ngModel)]="rgMdl.Address_2"  [formControl]="rgFrm.controls['Address_2']">              
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <input type="text" id="Address_1" name="Address_1" placeholder="APT #"  [(ngModel)]="rgMdl.Address_1" [ngModelOptions]="{standalone: true}">
+            <!--<input type="text" id="Address_1" name="Address_1" placeholder="APT #"  [(ngModel)]="rgMdl.Address_1" [formControl]="rgFrm.controls['Address_1']">
+            <div class="error text-center" *ngIf="rgFrm.controls['Address_1'].touched && rgFrm.controls['Address_1'].hasError('required')">Apt number is required.</div>-->
+          </div>
+        </div>
+      </div>
+       
+
+      <div class="row">
+        <!--<div class="col-sm-6">
+          <div class="form-group">
+            <input type="text" id="search-box"  name="Address_2" placeholder="STREET ADDRESS" [(ngModel)]="rgMdl.Address_2"  [formControl]="rgFrm.controls['Address_2']">
+              <div class="error text-center" *ngIf="rgFrm.controls['Address_2'].touched && rgFrm.controls['Address_2'].hasError('required')">Street Address is required.</div>
+            </div>
+        </div>      -->
+        <div class="col-sm-6">
+          <div class="form-group">
+            <input type="text" id="Address_City" name="Address_City" placeholder="City"  [(ngModel)]="rgMdl['Address_City']"  [formControl]="rgFrm.controls['Address_City']" >        
+            <div  class="error text-center" *ngIf="rgFrm.controls['Address_City'].touched && rgFrm.controls['Address_City'].hasError('required')">City is required.</div>
+          </div>
+        </div>   
+          <div class="col-sm-3">
+            <div class="form-group">
+              <input type="text"  id="Address_State_Abbr" name="Address_State_Abbr" placeholder="STATE" [ngModel]="rgMdl['Address_State_Abbr'] | phonenumber" (ngModelChange)="rgFrm['Address_State_Abbr']=$event" [formControl]="rgFrm.controls['Address_State_Abbr']" >              
+              <div class="error text-center" *ngIf="rgFrm.controls['Address_State_Abbr'].touched && rgFrm.controls['Address_State_Abbr'].hasError('required')">State is required.</div>
+            </div>
+        </div>    
+        <div class="col-sm-3">
+            <div class="form-group">
+              <input type="text" id="Address_ZipCode" name="Address_ZipCode" placeholder="ZIPCODE" maxlength="7" [(ngModel)]="rgMdl['Address_ZipCode']"  [formControl]="rgFrm.controls['Address_ZipCode']">              
+              <div class="error text-center" *ngIf="rgFrm.controls['Address_ZipCode'].touched && rgFrm.controls['Address_ZipCode'].hasError('required')">ZIPCODE is required.</div>
+              <div class="error text-center" *ngIf="rgFrm.controls['Address_ZipCode'].hasError('maxlength') && rgFrm.controls['Address_ZipCode'].touched">ZIPCODE is wrong</div>
+              <div class="error text-center" *ngIf="rgFrm.controls['Address_ZipCode'].hasError('maxlength') && !rgFrm.controls['Address_ZipCode'].dirty">ZIPCODE is wrong</div>
+              </div>
+        </div>        
+      </div>
+
+
+    <!--<div class="row">        -->
+         <!--<div class="col-sm-6">
+            <div class="form-group">
+              <input type="text" id="Address_State_Abbr" name="Address_State_Abbr" placeholder="STATE" [ngModel]="rgMdl['Address_State_Abbr'] | phonenumber" (ngModelChange)="rgFrm['Address_State_Abbr']=$event" [formControl]="rgFrm.controls['Address_State_Abbr']">              
+              <div class="error text-center" *ngIf="rgFrm.controls['Address_State_Abbr'].touched && rgFrm.controls['Address_State_Abbr'].hasError('required')">State is required.</div>
+            </div>
+        </div> -->
+        <!--<div class="col-sm-offset-6 col-sm-6">
+            <div class="form-group">
+              <input type="text" id="Address_ZipCode" name="Address_ZipCode" placeholder="ZIPCODE" maxlength="7" [(ngModel)]="rgMdl['Address_ZipCode']"  [formControl]="rgFrm.controls['Address_ZipCode']">              
+              <div class="error text-center" *ngIf="rgFrm.controls['Address_ZipCode'].touched && rgFrm.controls['Address_ZipCode'].hasError('required')">ZIPCODE is required.</div>
+              <div class="error text-center" *ngIf="rgFrm.controls['Address_ZipCode'].hasError('maxlength') && rgFrm.controls['Address_ZipCode'].touched">ZIPCODE is wrong</div>
+              <div class="error text-center" *ngIf="rgFrm.controls['Address_ZipCode'].hasError('maxlength') && !rgFrm.controls['Address_ZipCode'].dirty">ZIPCODE is wrong</div>
+              </div>
+        </div>-->
+        <!--<div class="col-sm-6">
+          <div class="form-group">
+            <input type="text" id="User_SSN" name="User_SSN" placeholder="SOCIAL SECURITY NUMBER" OnlyNumber="true" limit-to="11"
+            [ngModel]="rgMdl.User_SSN | ssn" (ngModelChange)="rgMdl.User_SSN=$event" [formControl]="rgFrm.controls['User_SSN']" >
+            <div class="error text-center" *ngIf="rgFrm.controls['User_SSN'].touched && rgFrm.controls['User_SSN'].hasError('required')">social security number is required.</div>
+            <div class="error text-center" *ngIf="rgFrm.controls['User_SSN'].touched && error">{{error}}</div>
+          </div>
+        </div>    -->
+      <!--</div>-->
+
+
+      <!--<div class="row">-->
+        <!--<div class="col-sm-6">
+          <div class="form-group">
+            <input type="text" id="User_SSN" name="User_SSN" placeholder="SOCIAL SECURITY NUMBER" OnlyNumber="true" limit-to="11"
+            [ngModel]="rgFrm.User_SSN | ssn" (ngModelChange)="rgMdl.User_SSN=$event" [formControl]="rgFrm.controls['User_SSN']" >
+            <div class="error text-center" *ngIf="rgFrm.controls['User_SSN'].touched && rgFrm.controls['User_SSN'].hasError('required')">social security number is required.</div>
+            <div class="error text-center" *ngIf="rgFrm.controls['User_SSN'].touched && error">{{error}}</div>
+          </div>
+        </div>        -->
+        <!--<div class="col-sm-6 ">
+          <div class="form-group margin-adjust">
+           <my-date-picker placeholder="MM/DD/YYYY [ Birthday ]" OnlyNumber="true" [options]="myDatePickerOptions" [selDate]="selBirthday" (dateChanged)="onFromDateChanged($event)" ></my-date-picker> 
+           <div class="error text-center" *ngIf="rgFrm.controls['User_DOB'].touched && rgFrm.controls['User_DOB'].hasError('required')">birthday date is required.</div>
+            <div class="error text-center" *ngIf="rgFrm.controls['User_DOB'].touched && error">{{error}}</div>
+            <div class="error text-center">{{vmsg}}</div>  
+          </div>
+        </div>
+      </div> -->
+
+      <div class="row">
+        <div class="col-sm-12 text-center">
+          <div class="form-group buttons">
+            <div class="row">
+              <div class="col-xs-2  col-sm-offset-2 pad-l0">
+                <button class="backbtn" type="button" (click)="gbf()"></button>                 
+              </div>
+              <div class="col-xs-10 col-sm-6">
+                <button [disabled]="!rgFrm.valid" type="submit">Save</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>  
+</form>
+<app-register-progress *ngIf="auth.isLoggedIn()"></app-register-progress>
+

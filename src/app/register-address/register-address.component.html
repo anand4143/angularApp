@@ -1,0 +1,79 @@
+<form [formGroup]="AddressFrm" (ngSubmit)="registerAddress()">
+
+  <!--<div *ngIf="!auth.isLoggedIn()" class="row top-buffer">  
+      <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 text-center">        
+        <h5>WE DON'T LIKE BEING NEW EITHER. ANSWER A FEW QUESTIONS FOR US SO WE CAN GET YOU RENTING YOUR APARTMENT.</h5>  
+    </div>        
+  </div>-->
+
+  <div class="row top-buffer">
+    <div class="col-md-8 col-md-offset-2">
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <input type="text" id="search-box"  name="Address_2" placeholder="STREET ADDRESS" [(ngModel)]="addressModel.Address_2"  [formControl]="AddressFrm.controls['Address_2']">
+              <div class="error text-center" *ngIf="AddressFrm.controls['Address_2'].touched && AddressFrm.controls['Address_2'].hasError('required')">Street Address is required.</div>
+              <!--<div class="error text-center" *ngIf="AddressFrm.controls['Address_2'].touched && AddressFrm.controls['Address_2'].hasError('minlength')">Street Address should be atleast 2 characters.</div>
+              <div class="error text-center" *ngIf="AddressFrm.controls['Address_2'].touched && AddressFrm.controls['Address_2'].hasError('maxlength')">Street Address should be max 32 characters.</div>-->
+              <!--<div class="error text-center" *ngIf="AddressFrm.controls['Address_2'].touched && error">{{error}}</div>-->
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <input type="text" id="Address_1" name="Address_1" placeholder="APT #"  [(ngModel)]="addressModel.Address_1" [formControl]="AddressFrm.controls['Address_1']">
+            <div class="error text-center" *ngIf="AddressFrm.controls['Address_1'].touched && AddressFrm.controls['Address_1'].hasError('required')">Apt number is required.</div>
+            <!--<div class="error text-center" *ngIf="AddressFrm.controls['Address_1'].touched && AddressFrm.controls['Address_1'].hasError('minlength')">Apt number should be atleast 2 characters.</div>
+            <div class="error text-center" *ngIf="AddressFrm.controls['Address_1'].hasError('maxlength') && AddressFrm.controls['Address_1'].touched">Apt number should be max 32 characters.</div>-->
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group">
+            <input type="text" id="Address_City" name="Address_City" placeholder="City"  [(ngModel)]="addressModel['Address_City']"  [formControl]="AddressFrm.controls['Address_City']" >        
+            <div  class="error text-center" *ngIf="AddressFrm.controls['Address_City'].touched && AddressFrm.controls['Address_City'].hasError('required')">City is required.</div>
+            <!--<div class="error text-center"  *ngIf="AddressFrm.controls['Address_City'].touched && !AddressFrm.controls['Address_City'].valid && !AddressFrm.controls['Address_City'].hasError('required')">Enter a valid e-Mail</div>-->
+          </div>
+        </div>        
+      </div>
+
+      <div class="row">       
+        <div class="col-sm-6">
+            <div class="form-group">
+              <input type="text" id="Address_State_Abbr" name="Address_State_Abbr" placeholder="STATE" [ngModel]="addressModel['Address_State_Abbr'] | phonenumber" (ngModelChange)="addressModel['Address_State_Abbr']=$event" [formControl]="AddressFrm.controls['Address_State_Abbr']">              
+              <div class="error text-center" *ngIf="AddressFrm.controls['Address_State_Abbr'].touched && AddressFrm.controls['Address_State_Abbr'].hasError('required')">State is required.</div>
+              <!--<div class="error text-center" *ngIf="AddressFrm.controls['Address_State_Abbr'].touched && !AddressFrm.controls['Address_State_Abbr'].valid && !AddressFrm.controls['Address_State_Abbr'].hasError('required')">Enter a valid State</div>-->
+              <!--<div class="error text-center" *ngIf="AddressFrm.controls['Address_State_Abbr'].touched && AddressFrm.controls['Address_State_Abbr'].hasError('maxlength')">State should be max 10 digits.</div>-->
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+              <input type="text" id="Address_ZipCode" name="Address_ZipCode" placeholder="ZIPCODE" [ngModel]="addressModel['Address_ZipCode'] | phonenumber" (ngModelChange)="addressModel['Address_ZipCode']=$event" [formControl]="AddressFrm.controls['Address_ZipCode']">              
+              <div class="error text-center" *ngIf="AddressFrm.controls['Address_ZipCode'].touched && AddressFrm.controls['Address_ZipCode'].hasError('required')">State is required.</div>
+              <!--<div class="error text-center" *ngIf="AddressFrm.controls['Address_ZipCode'].touched && !AddressFrm.controls['Address_ZipCode'].valid && !AddressFrm.controls['Address_ZipCode'].hasError('required')">Enter a valid Zipcode</div>-->
+              <!--<div class="error text-center" *ngIf="AddressFrm.controls['Address_ZipCode'].touched && AddressFrm.controls['Address_ZipCode'].hasError('maxlength')">Zipcode should be max 10 digits.</div>-->
+            </div>
+        </div>
+      </div>
+
+  
+      <div class="row">
+        <div class="col-sm-12 text-center">
+          <div class="form-group buttons">
+            <div class="row">
+              <div class="col-xs-2  col-sm-offset-2">
+                <button class="backbtn" type="button" (click)="gbf()"></button>                 
+              </div>
+              <div class="col-xs-10 col-sm-6">
+                <button [disabled]="!AddressFrm.valid" type="submit">NEXT</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</form>
+

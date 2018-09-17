@@ -1,0 +1,69 @@
+<div class="columns">
+  <div class="col-side bordered">
+    <!-- Start user progress component-->
+    <app-sidebar></app-sidebar>
+    <!-- End user progress component-->
+  </div>
+  <div class="col gutter-left" style="width:100%;">
+<div class="top-bordered">
+  <div class="top-icons">
+    <app-user-progress></app-user-progress>
+  </div>
+  <header class="row title-btns-split">
+    <div class="col-xs-12 col-sm-5 col-md-6 col-lg-7">
+      <!--<header class="title-btns-split">-->
+      <h1 *ngFor="let address of bkmrk.getAddressArray()">{{address}}</h1>
+      <!--</header>-->
+    </div>
+    <div class="col-xs-12 col-sm-7 col-md-6 col-lg-5">
+      <div class="row">
+        <button class="col-xs-3 backbtn" type="button" (click)="gbf()"></button>
+        <div class="col-xs-9">
+          <!--<button *ngIf="bkmrkAppSrv.Bookmark_Application.Bookmark_Application_Status == 8" class="button">View Payments</button> -->
+          <button *ngIf="bkmrkAppSrv.Bookmark_Application.Bookmark_Application_Status == constants.bookmarkApplicationStatus.acceptedLandlord"
+            class="button" (click)="approveAppliction()">APPROVE</button>
+          <button *ngIf="bkmrkAppSrv.Bookmark_Application.Bookmark_Application_Status == constants.bookmarkApplicationStatus.approvedLandlord"
+            class="button" (click)="confirmPaypalId()">CREATE CONTRACT</button>
+          <button *ngIf="bkmrkAppSrv.Bookmark_Application.Bookmark_Application_Status == constants.bookmarkApplicationStatus.leased"
+            class="button" (click)="gotoPayments()">VIEW PAYMENTS</button>
+          <button *ngIf="bkmrkAppSrv.Bookmark_Application.Bookmark_Application_Status < constants.bookmarkApplicationStatus.acceptedLandlord"
+            disabled>IN PROCESS WITH BROKER</button>
+        </div>
+      </div>
+    </div>
+    <div class="text-right" *ngIf="bkmrk.getRenterInfo()">
+      <h1>{{bkmrkAppSrv.getRenterInfo().name}} / {{bkmrkAppSrv.getRenterInfo().email}} / {{bkmrkAppSrv.getRenterInfo().phno}}</h1>
+      <h1> Represented by &nbsp;{{bkmrkAppSrv.getBrokerName()}} / {{bkmrkAppSrv.getBrokerContact()}} </h1>
+    </div>
+  </header>
+
+  <div *ngIf="verificationArray.length>0 && !addLandLord">
+    <div class="row">
+      <div class="box-area">
+        <div class="row data-area">
+          <div class="col-xs-6 col-sm-12 col-md-6 col-lg-4 data-box" *ngFor="let box of verificationArray">
+            <div class="info-box" (click)="verificationPopup(box)">
+              <span *ngIf="box.name">{{box.name}}<br/><br/></span>
+              <span *ngIf="box.dob">DOB:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{box.dob}}<br/></span>
+              <span *ngIf="box.ssn">SSN:&nbsp;&nbsp;&nbsp;{{box.ssn}}<br/></span>              
+              <span *ngIf="box.userfile">
+                    <img src="{{config.getS3Bucket()}}{{box.userfile}}" height="110" width="110" (click)="bkmrkAppSrv.downloadFile(box['File_Original_Name'], 'ID')" />
+                  </span>
+              <span *ngIf="box.text1">{{box.text1}}<br/></span>
+              <span *ngIf="box.showTick && isApproved(box)"><i class="fa fa-check" aria-hidden="true"></i><br/></span>
+              <br />
+              <!--<span *ngIf="box.fileCounter">{{box.fileCounter}}&nbsp;</span>
+              <span *ngIf="box.counterText">{{box.counterText}}<br/></span>
+              <span *ngIf="box.text2">{{box.text2}}<br/></span>-->
+              <!--<span *ngIf="box.showIncomeTick && isApproved(box)"><i class="fa fa-check" aria-hidden="true"></i><br/></span>-->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+</div>
+</div>

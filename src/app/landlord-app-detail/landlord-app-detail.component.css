@@ -1,0 +1,79 @@
+.info-box{
+    height: 13.27em;
+    background-color: #021245;
+    color: white;
+    padding: 4em 1em 0 1em;
+    text-align: center;
+    font-size: 0.8em;
+}
+
+.progress-box{
+    border: 1px solid black;
+    padding: 0.7em 0;
+    font-size: 0.6em;
+}
+
+.progress-desc{
+    padding-top: 1em;
+}
+
+.box-area{
+    padding: 0 0 1em 0;
+}
+
+.data-area{
+    border: 1px solid black;
+    padding: 1em 0 0 1em;
+}
+
+.data-box{
+    padding: 0 1em 1em 0;
+    cursor: pointer;
+}
+.pad-l-0{
+    padding-left: 0px;
+}
+
+.mark-notChecked{
+    background-color: lightslategray;
+}
+
+.mark-inComplete{
+    background-color: lightcoral;
+}
+
+.mark-inProgress{
+    background-color: greenyellow;
+}
+
+.mark-complete{
+    background-color: dodgerblue;
+}
+
+.bar{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 80%;
+}
+
+.is-table-row {
+    display: table;
+    width:100%;
+}
+
+.is-table-row [class*="col-"] {
+    float: none;
+    display: table-cell;
+    vertical-align: top;
+}
+
+input[type=text]{
+    padding: 0 0.2em 0.5em 0.2em;
+    margin: 1.5em 0;
+}
+
+.base-text{
+    padding: 0;
+}

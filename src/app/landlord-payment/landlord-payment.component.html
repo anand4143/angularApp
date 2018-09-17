@@ -1,0 +1,71 @@
+<div class="columns">
+  <div class="col-side bordered">
+    <!-- Start user progress component-->
+    <app-sidebar></app-sidebar>
+    <!-- End user progress component-->
+  </div>
+  <div class="col gutter-left"  style="width:100%;">
+    <div class="top-bordered">
+      <div class="top-icons">
+        <app-user-progress></app-user-progress>
+      </div>      
+      <header class="row title-btns-split" *ngIf="contract">
+        <div class="col-xs-6">
+          <h1>Contract start Date : &nbsp;{{contract.Contract_Start_Date | date:'MM/dd/yyyy'}}</h1>
+          <h1>Contract end Date : &nbsp;{{contract.Contract_End_Date | date:'MM/dd/yyyy'}}</h1>
+        </div>
+        <div class="col-xs-6">
+           <button class="col-xs-4 col-xs-offset-8 backbtn" type="button" (click)="gbf()"></button>
+        </div>        
+      </header>
+      <br/>
+      <fieldset *ngIf="selectedPayType != 'monthly'">
+        <legend>Subscription</legend>
+        <table *ngIf="payments">
+          <thead>
+            <th>Rent</th>
+            <th>Due date</th>
+            <th>Payment type</th>
+            <th>Status</th>
+          </thead>
+          <tbody *ngFor="let item of payments">           
+            <tr *ngIf="item.Payment_Type == constants.paymentType.subscription">
+              <td>{{item.Payment_Amount}}</td>
+              <td>{{item.Payment_Due_Date | date:'MM/dd/yyyy'}} </td>
+              <th ><span  *ngIf="item.Payment_Type == constants.paymentType.subscription" >Subscription</span></th>            
+              <td>
+                <div *ngIf="item.Payment_Status == constants.paymentInfoStatus.active">--</div> 
+                <div *ngIf="item.Payment_Status == constants.paymentInfoStatus.subscriptionEnabled">SUBSCRIBED ON {{item.Payment_Subscription_Date | date:'MM/dd/yyyy'}}</div> 
+                <div class="text-center error" *ngIf="item.error">{{item.error}}</div>                         
+              </td>            
+            </tr>
+          </tbody>
+        </table> 
+      </fieldset>
+      <fieldset *ngIf="selectedPayType != 'subscription'">
+        <legend>Monthly</legend>
+        <table *ngIf="payments">
+          <thead>
+            <th>Rent</th>
+            <th>Due date</th>
+            <th>Payment type</th>
+            <th>Status</th>
+          </thead>
+          <tbody *ngFor="let item of payments ;let i= index">           
+            <tr *ngIf="item.Payment_Type == constants.paymentType.monthly">
+              <td>{{item.Payment_Amount}}</td>
+              <td>{{item.Payment_Due_Date | date:'MM/dd/yyyy'}} </td>
+              <th ><span *ngIf="item.Payment_Type == 2">Monthly</span></th>            
+              <td>
+                <div *ngIf="item.Payment_Status == constants.paymentInfoStatus.active">--</div> 
+                <div *ngIf="item.Payment_Status == constants.paymentInfoStatus.processed">PAID ON {{item.Payment_Paid_Date | date:'MM/dd/yyyy'}}</div> 
+                <div class="text-center error" *ngIf="item.error">{{item.error}}</div>                             
+              </td>            
+            </tr>
+          </tbody>
+        </table>  
+      </fieldset>     
+  </div>
+</div>
+</div>
+

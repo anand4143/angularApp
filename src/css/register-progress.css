@@ -1,0 +1,105 @@
+
+.register-progress {
+	margin-bottom: 40px;
+	font-size: 11px;
+	text-align: center;
+}
+
+.register-progress > .inner {
+	height: 60px;
+	width: 693px;
+	margin: 0 auto;
+}
+
+.register-progress > .inner > * {
+	float: left;
+}
+
+.register-progress .connector {
+	width: 55px;
+	height: 2px;
+	background: #63698B;
+	margin-top: 14px;
+	opacity: 0.3;
+}
+
+.register-progress .node {
+	opacity: 0.3;
+	display: block;
+}
+
+.register-progress .node .icon {
+	width: 28px;
+	height: 28px;
+	border: 2px solid #4D5373;
+	border-radius: 14px;
+	background-repeat: no-repeat;
+	background-position: center center;
+	transition: transform 0.2s;
+}
+
+.register-progress a.node .icon:hover {
+	cursor: pointer;
+	-webkit-transform: scale(1.15);
+	-ms-transform: scale(1.15);
+	transform: scale(1.15);
+}
+
+.register-progress a.node .icon:hover + .label {
+	margin-top: 7px;
+}
+
+.register-progress .node.completed {
+	opacity: 1;
+}
+
+.register-progress .node.completed + .connector, .register-progress .node.skipped + .connector {
+	opacity: 1;
+}
+
+.register-progress .node.active {
+	opacity: 1;
+	color: #D98055;
+}
+.register-progress .node.active .icon {
+	border-color: #D98055;
+}
+
+.register-progress .node.skipped {
+	opacity: 1;
+	color: #FE2593;
+}
+.register-progress .node.skipped .icon {
+	border-color: #FE2593;
+}
+
+.register-progress .node .icon.text { background-image: url(../assets/images/misc/reg-prog-icon-text.svg); }
+.register-progress .node.active .icon.text { background-image: url(../assets/images/misc/reg-prog-icon-text-active.svg); }
+.register-progress .node.skipped .icon.text { background-image: url(../assets/images/misc/reg-prog-icon-text-skipped.svg); }
+
+.register-progress .node .icon.docs { background-image: url(../assets/images/misc/reg-prog-icon-docs.svg); }
+.register-progress .node.active .icon.docs { background-image: url(../assets/images/misc/reg-prog-icon-docs-active.svg); }
+.register-progress .node.skipped .icon.docs { background-image: url(../assets/images/misc/reg-prog-icon-docs-skipped.svg); }
+
+.register-progress .node .icon.check { background-image: url(../assets/images/misc/reg-prog-icon-check.svg); }
+.register-progress .node.active .icon.check { background-image: url(../assets/images/misc/reg-prog-icon-check-active.svg); }
+.register-progress .node.skipped .icon.check { background-image: url(../assets/images/misc/reg-prog-icon-check-skipped.svg); }
+
+.register-progress .node .label {
+	position: absolute;
+	left: 50%;
+	margin-top: 3px;
+	pointer-events: none;
+	transition: margin-top 0.2s;
+}
+
+.register-progress .node .label p {
+	left: -50%;
+	font-size: 11px;
+}
+
+@media only screen and (max-width: 820px) {
+	.register-progress {
+		display: none;
+	}
+}

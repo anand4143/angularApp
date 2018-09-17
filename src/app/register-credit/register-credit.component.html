@@ -1,0 +1,76 @@
+<form>
+  <div class="row top-buffer">
+    <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 text-center">
+      <h4>CREDIT CHECK</h4>
+      <!--<h5>WE DON'T LIKE BEING NEW EITHER. ANSWER A FEW QUESTIONS FOR US SO WE CAN GET YOU RENTING YOUR APARTMENT.</h5>  -->
+    </div>
+  </div>
+
+  <div class="row top-buffer">
+    <div class="col-md-8 col-md-offset-2 text-center">
+      <div class="row">
+        <div class="col-sm-12 text-center">
+          <div class="row">
+            <div class="col-sm-offset-2 col-sm-8 pad-l0">
+              <button class="round-button adjust-height" [disabled]="regCredService.getCreditStatus() || creditBut" (click)="getScore()">RUN CREDIT CHECK</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--<div class="form-group buttons ">
+              <div class="row">
+                <div class="col-xs-8 col-sm-offset-2">
+                    <button class="btnradius" [disabled]="regCredService.getCreditScore()" (click)="getScore()" >RUN CREDIT CHECK</button>        
+                </div>
+              </div>
+          </div>-->
+
+      <!--<div class="form-group">
+            <h6>YOUR FICO SCORE IS:</h6>
+            <h6 *ngIf="!regCredService.getCreditScore()">xxx</h6>
+            <span *ngIf="regCredService.getCreditScore()" class="result focus">{{regCredService.creditScore}}</span>
+          </div>-->
+
+
+      <div *ngIf="regCredService.getCreditRecord()">
+        <div *ngIf="regCredService.getCreditStatus()">Generated on {{regCredService.creditRecord.Credit_Info_Creation_Date | date:'MM/dd/yyyy'}} &nbsp;
+          <a *ngIf="regCredService.getAuthStatus()" (click)="openNewWindow()" class="report-style">view report</a>
+          <div *ngIf="!regCredService.getAuthStatus()">Please accept the <a (click)="goToTC()">Terms & Conditions</a> to share the report</div>
+        </div>
+        <div *ngIf="!regCredService.getCreditStatus()">Expired on {{regCredService.creditRecord.Credit_Info_Expiry_Date | date:'MM/dd/yyyy'}}</div>
+      </div>
+      <div class="form-group buttons">
+        <!--<my-spinner [isRunning]="isSpinner" id="loading"></my-spinner>-->
+
+        <div class="row" *ngIf="!isSpinner">
+          <!--<div class="col-xs-2 pad-l0">
+                <button class="backbtn" type="button" (click)="gbf()"></button>                 
+              </div>             
+              <div class="col-xs-10">-->
+          <!--<button *ngIf="!regCredService.getCreditScore()" (click)="getScore()" >RUN CREDIT CHECK</button>-->
+          <!--<button *ngIf="regCredService.getCreditScore()" (click)="creditResult()" >NEXT</button>-->
+          <!--<button (click)="creditResult()" >NEXT</button>
+              </div>-->
+          <div class="row">
+            <div class="col-sm-12 text-center">
+              <!--<div class="form-group buttons">-->
+              <div class="row">
+                <div class="col-xs-8 col-sm-offset-2">
+                  <button class="backbtn" type="button" (click)="gbf()"></button>
+                </div>
+                <!--<div class="col-xs-10 col-sm-6">
+                        <button (click)="creditResult()" >NEXT</button>
+                      </div>-->
+              </div>
+              <!--</div>-->
+            </div>
+          </div>
+        </div>
+        <!--<div *ngIf="!error.length" class="error text-center">{{error}}</div>-->
+      </div>
+    </div>
+  </div>
+</form>
+
+<app-register-progress></app-register-progress>

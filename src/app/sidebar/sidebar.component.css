@@ -1,0 +1,30 @@
+.lower-sidebar-menu{   
+    border-bottom: none;
+    border-top: 1px solid;
+ }
+
+.no-border{
+    border-left: 3px solid;
+    border-right: 3px solid;
+    margin-left: -2px;
+    margin-right: -2px;
+    border-left-color: white;
+    border-right-color : white;
+ }
+
+ a{
+    color: #2B3761  !important;   
+ }
+    
+
+
+.sidebarmenus{
+    background-color: #2B3761  !important;
+    color: white !important;
+    border-color: #2B3761  !important;
+}    
+
+.sidebarDisabledMenus{
+    color: grey !important;
+    pointer-events: none !important;
+}    

@@ -1,0 +1,75 @@
+<div class="columns">
+  <div class="col-side bordered">
+    <!-- Start user progress component-->
+    <app-sidebar></app-sidebar>
+    <!-- End user progress component-->
+  </div>
+  <div class="col gutter-left" style="width:100%;">
+    <div class="top-bordered">
+      <div class="top-icons">
+        <app-user-progress></app-user-progress>
+      </div>
+      <header class="row title-btns-split">
+        <div class="col-xs-12 col-sm-6 col-md-7 col-lg-8">
+          <!--<header class="title-btns-split">-->
+          <h1 *ngFor="let address of bkmrk.getAddressArray()">{{address}}</h1>
+          <!--</header>-->
+        </div>
+
+        <div class="col-xs-12 col-sm-6 col-md-5 col-lg-4"> </div>
+
+      </header>
+
+      <div class="row">
+        <div class="col-sm-12 outer-box">
+          <div class="row text-center">CONGRATULATIONS!</div>
+          <div class="row text-center">YOUR APPLICATION FOR</div>
+          <div class="row text-center"> {{ bkmrk.getAddressArray()}}. HAS BEEN SUBMITTED</div>
+          <div class="row text-center"> Monthly rent : $ {{rent}}. </div>
+          <div class="row text-center" *ngIf="fileCounter!=appDocuments.length"> Sign all the below the documents </div>
+           <br>
+
+          <!--<div class="row text-center">
+            CONGRATULATION! YOUR APPLICATION FOR {{ bkmrk.getAddressArray()}}. HAS BEEN SUBMITTED<br />
+            <span>Monthly rent : $ {{rent}}</span>
+          </div><br /><br />-->
+          <!--<div class="row text-center" *ngIf="fileCounter!=appDocuments.length">Sign all the below the documents</div>-->
+           <!--<form [formGroup]="leaseFrm" (ngSubmit)="sendDocumentToBroker()">-->
+            <div *ngFor="let fname of appDocuments;let i = index">            
+              <div class="row inner-box" [ngClass]="{'disable-click': fname.disable}" (click)="openHelloSign(fname,i)">
+                <!--<div class="col-xs-1" (click)="deleteDocument(i)">
+                  <span class="glyphicon glyphicon-trash"></span>
+                </div>
+                <div class="col-xs-1" (click)="fileSrv.downloadDocumentFile(fname['Bookmark_Application_Document_ID'])">
+                  <span class="glyphicon glyphicon-download-alt"></span>
+                </div>-->
+                <div class="col-xs-6">{{fname['Document_Original_Name']}} </div>
+                
+                <div class="col-xs-4">
+                  <span>Status&nbsp;:&nbsp;</span>
+                  <span *ngIf="fname['Document_Status']==constants.bkmrkAppDocStatus.toBeUploaded">To Be Uploaded</span>
+                  <span *ngIf="fname['Document_Status']==constants.bkmrkAppDocStatus.uploaded">Pending Signature</span>
+                  <span *ngIf="fname['Document_Status']==constants.bkmrkAppDocStatus.signed">Signed</span>
+                </div>
+              </div>
+            </div>
+            <div class="row" >
+              <div class="col-sm-12 text-center">
+                <div class="form-group buttons">
+                  <div class="row">
+                   <div class="col-xs-2  col-sm-offset-2 pad-l0">
+                    <button class="backbtn" type="button" (click)="gbf()"></button>                 
+                  </div>                   
+                    <div class="col-xs-10 col-sm-6">
+                      <button  [disabled]="!(sendToBrokerBtn && fileCounter==appDocuments.length)" type="button" (click)="sendDocumentToBroker()">SEND TO BROKER</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <!--</form>-->
+       </div>
+      </div>
+    </div>
+  </div>
+</div>

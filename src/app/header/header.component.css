@@ -1,0 +1,28 @@
+.main-logo{
+    margin-top: 4em;
+    
+}
+.main-logo a{
+    font-weight: lighter;
+    font-size: 4em;
+    color: #2B3761 ;
+    text-decoration: none;
+    letter-spacing: 4px;
+    
+}
+
+.sub-logo a{
+    font-weight: lighter;
+    font-size: 2.0em;
+    color: #2B3761 ;
+    text-decoration: none;
+    position: absolute;
+    letter-spacing: 4px;
+    margin: 19px 0px 0px -1px;
+}
+
+.badge{
+    background-color: red;
+    vertical-align: super;
+    height: 16px;
+}

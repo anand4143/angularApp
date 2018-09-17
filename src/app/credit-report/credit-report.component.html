@@ -1,0 +1,161 @@
+<div class="row top-buffer">
+    <div class="col-xs-10 text-center">
+        <h3 class="report">Credit Report</h3>
+    </div>
+    <div class="col-xs-2">
+        <button class="backbtn" type="button" (click)="gbf()"></button>
+    </div>
+</div>
+
+<div class="row top-buffer">
+    <br/>
+    <div><strong> Report Date: </strong> {{reportDate}}&nbsp;( <i>Valid for 30 days from Report Date.</i> )</div>
+    <br/>
+    <div><a [routerLink]="['/creport-privacy-policy']"><span class="report-style">Click here</span></a>&nbsp;&nbsp;for our Privacy Policy</div><br/>
+    <div *ngIf="auth.isRenter()">For any disclosures and disputes of Experian Information please contact
+        <a href="https://www.experian.com/blogs/ask-experian/credit-education/faqs/how-to-dispute-credit-report-information/" target="_blank">
+        Experian’s National Consumer Assistance Center</a>
+    </div>
+
+    <h2>Personal Information</h2>
+    <div class="row">
+        <div class="col-sm-6">
+            <h5>Name and Address</h5>
+            <div *ngFor="let name of regCredService.getCreditReport().ConsumerIdentity; let i = index;">
+                <span *ngIf="i==0 && name.Name.First">{{name.Name.First}}&nbsp;</span>
+                <span *ngIf="i==0 && name.Name.Middle">{{name.Name.Middle}}&nbsp;</span>
+                <span *ngIf="i==0 && name.Name.Surname">{{name.Name.Surname}}</span>
+            </div>
+            <div *ngFor="let address of regCredService.getCreditReport().AddressInformation; let i = index;">
+                <div *ngIf="i==0 && address.StreetName">{{address.StreetName}},</div>
+                <span *ngIf="i==0 && address.City">{{address.City}},&nbsp;</span>
+                <span *ngIf="i==0 && address.State">{{address.State}}</span>
+                <span *ngIf="i==0 && address.Zip">-{{address.Zip}}</span>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <h5>Employment History</h5>
+            <div *ngIf="regCredService.getCreditReport().EmploymentInformation && regCredService.getCreditReport().EmploymentInformation.length==0">None on File</div>
+            <div *ngFor="let emp of regCredService.getCreditReport().EmploymentInformation">
+                <div *ngIf="emp.Name">{{emp.Name}}</div>
+            </div>
+        </div>
+    </div>
+
+    <h2>Credit Score</h2>
+    <div class="row">
+        <div class="col-sm-4">
+            <h5>Score & Risk Model</h5>
+            <div *ngFor="let crScore of regCredService.getCreditReport().RiskModel">
+                <div class="result focus" *ngIf="crScore.Score">{{crScore.Score}}</div>
+            </div>
+            <br/>
+            <span>The VantageScore 3.0&reg; risk model has a score range of 300-850</span>
+
+        </div>
+        <div class="col-sm-4">
+            <h5>Negative Score Factors</h5>
+            <div *ngFor="let neScore of regCredService.getCreditReport().RiskModel">
+                <div *ngIf="neScore.ScoreFactorCodeOne">1. {{neScore.ScoreFactorCodeOne}}</div>
+                <div *ngIf="neScore.ScoreFactorCodeTwo">2. {{neScore.ScoreFactorCodeTwo}}</div>
+                <div *ngIf="neScore.ScoreFactorCodeThree">3. {{neScore.ScoreFactorCodeThree}}</div>
+                <div *ngIf="neScore.ScoreFactorCodeFour">4. {{neScore.ScoreFactorCodeFour}}</div>
+                <div *ngIf="neScore.ScoreFactorCodeFive">5. {{neScore.ScoreFactorCodeFive}}</div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <h5>Positive Score Factors</h5>
+            <div *ngFor="let poScore of regCredService.getCreditReport().RiskModel">
+                <div *ngIf="poScore.positiveScoreFactorCodeOne">1. {{poScore.positiveScoreFactorCodeOne}}</div>
+                <div *ngIf="poScore.positiveScoreFactorCodeTwo">2. {{poScore.positiveScoreFactorCodeTwo}}</div>
+                <div *ngIf="poScore.positiveScoreFactorCodeThree">3. {{poScore.positiveScoreFactorCodeThree}}</div>
+                <div *ngIf="poScore.positiveScoreFactorCodeFour">4. {{poScore.positiveScoreFactorCodeFour}}</div>
+            </div>
+        </div>
+    </div>
+
+    <!--<h2>Consumer Statements</h2>
+    <span *ngIf="regCredService.getCreditReport()['Statement']">{{regCredService.getCreditReport()['Statement']}}</span>
+    <span *ngIf="!regCredService.getCreditReport()['Statement']">None on file</span>
+
+    <h2>Informational Message</h2>
+    <div *ngIf= "!regCredService.getCreditReport().InformationalMessage">None on File</div>
+    <div *ngIf= "regCredService.getCreditReport().InformationalMessage">
+        <h3>Message</h3>
+        <div *ngFor="let message of regCredService.getCreditReport().InformationalMessage">
+            <span>{{message.MessageText}}</span>
+        </div>
+    </div>-->
+
+    <h2>Account History</h2>
+    <div *ngIf="!regCredService.getCreditReport().TradeLine">None on File</div>
+    <div *ngIf="regCredService.getCreditReport().TradeLine">
+        <div class="row">
+            <h5 class="col-sm-2">Balance Date</h5>
+            <h5 class="col-sm-3">Business</h5>
+            <h5 class="col-sm-2">Balance Amount</h5>
+            <h5 class="col-sm-3">Account Condition</h5>
+            <h5 class="col-sm-2">Payment Status</h5>
+        </div>
+        <div class="row" *ngFor="let account of regCredService.getCreditReport().TradeLine">
+            <div class="col-sm-2">{{account.BalanceDate}}</div>
+            <div class="col-sm-3">{{account.SubscriberDisplayName}}</div>
+            <div class="col-sm-2">{{account.BalanceAmount}}</div>
+            <div class="col-sm-3">{{account.EnhancedPaymentData.AccountCondition.desc}}</div>
+            <div class="col-sm-2">{{account.EnhancedPaymentData.PaymentStatus.desc}}</div>
+        </div>
+    </div>
+
+    <h2>Public Records</h2>
+    <div *ngIf="!regCredService.getCreditReport().PublicRecord">None on File</div>
+    <div *ngIf="regCredService.getCreditReport().PublicRecord">
+        <div class="row">
+            <h5 class="col-sm-2">Status Date</h5>
+            <h5 class="col-sm-3">Type(Status)</h5>
+            <h5 class="col-sm-1">Amo- unt</h5>
+            <h5 class="col-sm-1">Liabi- lity</h5>
+            <h5 class="col-sm-1">Assets Plain- tiff</h5>
+            <h5 class="col-sm-2">Court</h5>
+            <h5 class="col-sm-2">Filing Date</h5>
+        </div>
+        <div class="row" *ngFor="let record of regCredService.getCreditReport().PublicRecord">
+            <div class="col-sm-2">{{record.StatusDate}}</div>
+            <div class="col-sm-3">{{record.Status.desc}}</div>
+            <div class="col-sm-1">{{record.Amount}}</div>
+            <div class="col-sm-1">{{record.Bankruptcy.LiabilitiesAmount}}</div>
+            <div class="col-sm-1">{{record.Bankruptcy.AssetAmount}}</div>
+            <div class="col-sm-2">{{record.Court.desc}}</div>
+            <div class="col-sm-2">{{record.FilingDate}}</div>
+        </div>
+    </div>
+
+    <h2>Inquiries</h2>
+    <div *ngIf="!regCredService.getCreditReport().Inquiry">None on File</div>
+    <div *ngIf="regCredService.getCreditReport().Inquiry">
+        <div class="row">
+            <h5 class="col-sm-2">Date</h5>
+            <h5 class="col-sm-5">Business</h5>
+            <h5 class="col-sm-5">Reason</h5>
+        </div>
+        <div class="row" *ngFor="let inquiry of regCredService.getCreditReport().Inquiry">
+            <div class="col-sm-2">{{inquiry.Date}}</div>
+            <div class="col-sm-5">{{inquiry.SubscriberDisplayName}}</div>
+            <div class="col-sm-5">{{inquiry.Type.desc}}</div>
+        </div>
+    </div>
+
+    <h2>Consumer Assistance</h2>
+    <div>Concreet</div>
+    <div>200 Vesey Street Floor 24,<br/>New York, NY 10281</div>
+    <div>800-258-0397</div>
+    <br/>
+    <div>Data Provided by Experian</div>
+    <div *ngIf="regCredService.getCreditReport()['ConsumerAssistanceReferralAddress']">{{regCredService.getCreditReport()['ConsumerAssistanceReferralAddress']['OfficeName']}}</div>
+    <div *ngIf="regCredService.getCreditReport()['ConsumerAssistanceReferralAddress']">{{regCredService.getCreditReport()['ConsumerAssistanceReferralAddress']['StreetName']}}</div>
+    <div *ngIf="regCredService.getCreditReport()['ConsumerAssistanceReferralAddress']">{{regCredService.getCreditReport()['ConsumerAssistanceReferralAddress']['CityStateZip']}}</div>
+    <div *ngIf="regCredService.getCreditReport()['ConsumerAssistanceReferralAddress']">{{regCredService.getCreditReport()['ConsumerAssistanceReferralAddress']['Phone']}}</div>
+    <br/>
+    <br/>
+    <span>VantageScore&reg; is a registered trademark of VantageScore Solutions, LLC</span>
+    <!--</div>-->
+</div>

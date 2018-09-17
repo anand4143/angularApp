@@ -1,0 +1,66 @@
+<div class="columns">
+  <div class="col-side bordered">
+    <!-- Start user progress component-->
+    <app-sidebar></app-sidebar>
+    <!-- End user progress component-->
+  </div>
+  <div class="col gutter-left"  style="width:100%;">
+    <div class="top-bordered">
+      <div class="top-icons">
+        <app-user-progress></app-user-progress>
+      </div>
+      <div class="row top-buffer">
+        <!--<div class="row">-->
+        <!--<div class="col-sm-6 col-sm-offset-3"><span *ngIf="viewLandlordBtn"> PLEASE ENTER YOUR </span> LANDLORD'S INFORMATION</div>-->
+      <!--</div>-->
+      <div class="row top-buffer">
+        <div class="col-sm-offset-2 col-sm-8 col-md-offset-3 col-md-6 ">
+          <form [formGroup]="approveFrm" (ngSubmit)="updateInfo()">
+            <div class="col-sm-12" *ngIf="viewLandlordBtn">PLEASE ENTER YOUR LANDLORD'S INFORMATION<br/><br/><br/></div>
+            <div class="col-sm-12 pad-l0 text-center" *ngIf="!viewLandlordBtn">LANDLORD'S INFORMATION<br/><br/><br/></div>
+
+            <input type="text" [(ngModel)]="approveModel.User_First_Name" placeholder="LANDLORD FIRST NAME" [formControl]="approveFrm.controls['User_First_Name']" [readonly]="formFieldsdisable" id="landlordFirstName">
+            <div>
+              <div class="error text-center" *ngIf="approveFrm.controls['User_First_Name'].touched && approveFrm.controls['User_First_Name'].hasError('required')">First Name is required.</div>
+              <div class="error text-center" *ngIf="approveFrm.controls['User_First_Name'].touched && approveFrm.controls['User_First_Name'].hasError('minlength')">First Name should be atleast 2 characters.</div>
+              <div class="error text-center" *ngIf="approveFrm.controls['User_First_Name'].touched && approveFrm.controls['User_First_Name'].hasError('maxlength')">First Name should be max 32 characters.</div>
+            </div>  
+            <input type="text" [(ngModel)]="approveModel.User_Last_Name" placeholder="LANDLORD LAST NAME" [formControl]="approveFrm.controls['User_Last_Name']"  [readonly]="formFieldsdisable" id="landlordLastName">
+            <div>
+              <div class="error text-center" *ngIf="approveFrm.controls['User_Last_Name'].touched && approveFrm.controls['User_Last_Name'].hasError('required')">Last Name is required.</div>
+              <div class="error text-center" *ngIf="approveFrm.controls['User_Last_Name'].touched && approveFrm.controls['User_Last_Name'].hasError('minlength')">Last Name should be atleast 2 characters.</div>
+              <div class="error text-center" *ngIf="approveFrm.controls['User_Last_Name'].touched && approveFrm.controls['User_Last_Name'].hasError('maxlength')">Last Name should be max 32 characters.</div>
+            </div>
+            <input type="text" [(ngModel)]="approveModel['Email_Address']" placeholder="LANDLORD EMAIL ADDRESS"  [formControl]="approveFrm.controls['Email_Address']"  validateEmail validateEqual="confirmEmail" reverse=true [readonly]="formFieldsdisable" (focusout)="landlordEmailVerification()" id="landlordEmail">
+            <div>
+              <div  class="error text-center" *ngIf="approveFrm.controls['Email_Address'].touched && approveFrm.controls['Email_Address'].hasError('required')">e-Mail is required.</div>
+              <div class="error text-center"  *ngIf="approveFrm.controls['Email_Address'].touched && !approveFrm.controls['Email_Address'].valid && !approveFrm.controls['Email_Address'].hasError('required')">Enter a valid e-Mail</div>
+            </div>
+            <!--<input type="text" [(ngModel)]="approveModel['confirmEmail']" placeholder="CONFIRM EMAIL" [formControl]="approveFrm.controls['confirmEmail']" validateEqual="Email_Address" *ngIf="!formFieldsdisable" id="landlordConfEmail">-->
+            <input type="text" [(ngModel)]="approveModel['confirmEmail']" placeholder="CONFIRM EMAIL" [formControl]="approveFrm.controls['confirmEmail']" validateEqual="Email_Address" id="landlordConfEmail" [readonly]="formFieldsdisable">
+            <div>
+              <div class="error text-center" *ngIf="approveFrm.controls['confirmEmail'].touched && approveFrm.controls['confirmEmail'].hasError('required')">Confirm e-Mail is required.</div>
+              <div class="error text-center"  *ngIf="approveFrm.controls['confirmEmail'].touched && !approveFrm.controls['confirmEmail'].valid && !approveFrm.controls['confirmEmail'].hasError('required')">e-Mails should match</div>
+              <div class="error text-center" *ngIf="approveFrm.controls['confirmEmail'].touched && error">{{error}}</div>
+            </div>
+            <div class="row" *ngIf="errorVar">
+              <div class="error text-center">{{errorMsg}}</div>
+            </div>
+            <div class="row" *ngIf="viewLandlordBtn">
+              <button class="col-xs-2 backbtn" type="button" (click)="gbf()"></button>
+              <div class="col-xs-10">
+                <button type="submit"  [disabled]="!approveFrm.valid" id="sendLandlordDataButton">SEND COMPLETE PACKAGE TO LANDLORD</button>
+              </div>
+            </div>
+
+            <div class="row" *ngIf="!viewLandlordBtn">
+              <button class="backbtn" type="button" (click)="gbf()"></button>
+            </div>
+
+          </form>         
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

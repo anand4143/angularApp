@@ -1,0 +1,76 @@
+<div class="row top-buffer">
+    <div class="col-xs-10 text-center">
+        <h3 class="report">Backckground Verification Report</h3>
+    </div>
+    <div class="col-xs-2">
+        <button class="backbtn" type="button" (click)="gbf()"></button>
+    </div>
+</div>
+<div class="row top-buffer">
+    <br/>
+    <div><strong>  Report Date:</strong> {{report.created | date:'MM/dd/yyyy' }}&nbsp;( <i>Valid for 30 days from Report Date.</i> )</div>
+    <h2>Personal Information</h2>
+    <div class="row">
+        <div class="col-sm-6">
+            <h5>Name and Address</h5>
+            <div *ngIf="candidate">
+                <span>{{candidate.firstName}}&nbsp;</span>
+                <span>{{candidate.lastName}}&nbsp;</span>               
+            </div>            
+            <div *ngIf="candidate">               
+                <span>{{candidate.address}}</span>
+                <span>,{{candidate.city}}</span>
+                <span>,{{candidate.region}}</span>
+                <span>,{{candidate.country}}</span>
+                <span>-{{candidate.postalCode}}</span>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <h5>Job Location</h5>            
+            <div *ngIf="jobLocation">
+                <span>{{jobLocation.city}}</span>
+                <span>,&nbsp; {{jobLocation.region}}</span>
+                <span>,&nbsp; {{jobLocation.country}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <h5>Email and Phone DOB</h5>
+            <div *ngIf="candidate">
+                <span>{{candidate.phone}}&nbsp;</span>                              
+            </div>
+            <div *ngIf="candidate">
+                <span>{{candidate.email}}&nbsp;</span>                              
+            </div>            
+           
+        </div>
+        <div class="col-sm-6">
+            <h5>SSN and DOB</h5> 
+             <div *ngIf="candidate">               
+               <span>{{candidate.ssn}}&nbsp;</span> 
+            </div>
+             <div *ngIf="candidate">               
+               <span>{{candidate.dateOfBirth}}&nbsp;</span> 
+            </div>          
+        </div>
+    </div>
+    <h2>Convictions</h2>   
+    <div class="row">
+        <div class="col-sm-12">
+            <div *ngIf= "!convictions.length">None on File</div>
+            <div *ngIf= "convictions.length">
+                <div class="row">
+                    <h5 class="col-sm-2">Conviction Date</h5>
+                    <h5 class="col-sm-6">Description</h5>
+                    <h5 class="col-sm-4">location</h5>                  
+                </div>
+                <div class="row" *ngFor="let conviction of convictions">
+                    <div class="col-sm-2">{{conviction.convictionDate}}</div>
+                    <div class="col-sm-6">{{conviction.description}}</div>
+                    <div class="col-sm-4">{{conviction.location}}</div>                  
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

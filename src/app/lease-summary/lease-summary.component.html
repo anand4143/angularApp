@@ -1,0 +1,64 @@
+<div class="columns">
+  <div class="col-side bordered">
+    <!-- Start user progress component-->
+    <app-sidebar></app-sidebar>
+    <!-- End user progress component-->
+  </div>
+  <div class="col gutter-left" style="width:100%;">
+    <div class="top-bordered">
+      <div class="top-icons">
+        <app-user-progress></app-user-progress>
+      </div>
+      <header class="row title-btns-split">
+        <div class="col-xs-12 col-sm-6 col-md-7 col-lg-8">
+          <!--<header class="title-btns-split">-->
+          <h1 *ngFor="let address of bkmrk.getAddressArray()">{{address}}</h1>          
+          <!--</header>-->
+        </div>
+
+        <div class="col-xs-12 col-sm-6 col-md-5 col-lg-4"> 
+          <div class="row">
+            <button class="col-xs-3 backbtn" type="button" (click)="gbf()"></button>
+            <div class="col-xs-9">
+              <a class="button"><span>Schedule a Viewing</span></a>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <div class="row">
+        <div class="col-xs-12 outer-box">
+          <div class="row">
+            CONGRATULATION! YOUR APPLICATION FOR {{ bkmrk.getAddressArray()}}. HAS BEEN SUBMITTED<br />
+            <span>Monthly rent : $ {{rent}}</span>
+          </div><br /><br /><br />
+            <div class="row">
+              <div class="col-xs-6 col-xs-offset-3">
+                <button type="button" (click)="leaseDocument()"><span>SIGN YOUR LEASE NOW</span></button>
+              </div>   
+            </div>     
+       </div>
+      </div>
+
+      <!--<div class="row">
+        <div class="col-sm-12 outer-box">
+          <div class="row">
+            CONGRATULATION! <br />YOUR APPLICATION FOR {{ bkmrk.getAddressArray()}}.<br /> HAS BEEN SUBMITTED
+          </div><br /><br /><br />
+          <div class="form-group buttons">
+            <div class="row">
+              <div class="col-xs-2  col-sm-offset-2 pad-l0">
+                <button class="backbtn" type="button" (click)="gbf()"></button>                 
+              </div>
+              <div class="col-xs-10 col-sm-6">
+                <button (click)="leaseDocument()">SIGN YOUR LEASE NOW</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>-->
+
+
+    </div>
+  </div>
+</div>

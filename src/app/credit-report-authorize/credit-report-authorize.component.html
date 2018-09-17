@@ -1,0 +1,89 @@
+<div class="report">
+  <h1>Disclosures</h1>
+  <div>
+    1. The Fair Credit Reporting Act allows me to obtain a disclosure from every credit reporting agency of the nature and substance of all information 
+    in my file at the time of the request.   Full disclosure of information in my file at Experian must be obtained directly from Experian by calling 888-397-3742 
+    or logging on to www.experian.com/consumer. The credit report I am requesting from Concreet is not intended to constitute the disclosure of Experian information 
+    required by the Fair Credit Reporting Act or similar state laws.
+  </div>
+  <br/>
+  <div>
+    2. I am entitled to receive a disclosure directly from the consumer reporting agency free of charge under the following circumstances:
+  </div>
+  <div>
+    &nbsp;&nbsp;a. I have been denied credit, insurance or employment within the past sixty (60) days as a result of my credit report
+  </div>
+  <div>
+    &nbsp;&nbsp;b. I certify in writing that I am unemployed and intend to apply for employment in the 60-day period beginning on the date on which I made the certification
+  </div>
+  <div>
+    &nbsp;&nbsp;c. I am a recipient of public welfare assistance
+  </div>
+  <div>
+    &nbsp;&nbsp;d. I have reason to believe that my file at the agency contains inaccurate information due to fraud
+  </div>
+  <div>
+    &nbsp;&nbsp;e. Annually at www.annualcreditreport.com
+  </div>
+  <div>
+    Otherwise, the consumer reporting agency may impose a reasonable charge for the disclosure.
+  </div>
+  <br/>
+  <div>
+    3. The Fair Credit Reporting Act permits me to dispute inaccurate or incomplete information in my credit file. I understand that accurate information cannot be changed.
+  </div>
+  <br/>
+  <div>
+    4. I do not have to purchase my credit report or other information from Concreet to dispute inaccurate or
+     incomplete information in my Experian file or to receive a copy of my Experian consumer credit report.
+  </div>
+  <br/>
+  <div>
+    5. Experian’s National Consumer Assistance Center provides a proprietary consumer disclosure that is different from the consumer credit report provided by Concreet. 
+    The disclosure report must be obtained directly from Experian. Consumers residing in the States of Colorado, Massachusetts, Maryland, New Jersey, 
+    and Vermont may receive a free copy of their consumer credit report once per year and residents of the State of Georgia may receive two copies per year.
+  </div>
+  <br/>
+  <div>
+    6. Fraud Alerts are available to any eligible consumers—free of charge—from a national consumer reporting agency.
+  </div>
+  <br/>
+  <div>
+    7. I have the right to purchase a consumer credit score directly from Experian.
+  </div>
+  <br/>
+  <br/>
+
+
+  <!--Below details must have a check box and customer must agree clicking on check box-->
+  <form [formGroup]="tcForm" (ngSubmit)="submit()">
+    <div>
+      <input class="adjust-alignment" type ="checkbox" id="agreeListing" name="agreeListing" (change)="display()" [(ngModel)]="tcFormModel.agreeListing"  [formControl]="tcForm.controls['agreeListing']"/>
+      I agree to the 7 points mentioned in above disclosures.
+    </div>
+    <br/>
+    <div>
+      <input class="adjust-alignment" type ="checkbox" id="agreePolicy" name="agreePolicy" [(ngModel)]="tcFormModel.agreePolicy"  [formControl]="tcForm.controls['agreePolicy']"/>
+      I agree to the Terms and Conditions, and to the <a [routerLink]="['/creport-privacy-policy']">Privacy Policy</a>, 
+      and consent to this report being shared with Concreet.
+    </div>
+    <br/>
+    <div>      
+      <input class="adjust-alignment" type ="checkbox" id="agreeContact" name="agreeContact" [(ngModel)]="tcFormModel.agreeContact"  [formControl]="tcForm.controls['agreeContact']"/>
+      I agree to contact <a href="https://www.experian.com/blogs/ask-experian/credit-education/faqs/how-to-dispute-credit-report-information/" target="_blank">
+      Experian’s National Consumer Assistance Center</a> 
+      for any disclosures and disputes of Experian Information
+    </div>
+    <br/>
+    <div>
+      <input class="adjust-alignment" type ="checkbox" id="agreeAuthorization" name="agreeAuthorization" [(ngModel)]="tcFormModel.agreeAuthorization"  [formControl]="tcForm.controls['agreeAuthorization']"/>
+      I understand that by clicking on the I AGREE button immediately following this notice, I am providing ‘written instructions’ to Concreet 
+      under the Fair Credit Reporting Act authorizing (Reseller) to obtain information from your personal credit report or other information from Experian. 
+      I authorize Concreet to obtain such information solely to access and share an abbreviated version of your credit report and VantageScore credit score with brokers/landlords 
+      whom I have authorized to view your report and score for assisting me in my leasing process through Concreet.
+    </div>
+    <br/>
+    <button type="submit" [disabled]="!tcFormModel.agreeListing || !tcFormModel.agreePolicy ||  !tcFormModel.agreeContact || !tcFormModel.agreeAuthorization " >I Agree</button>
+  </form>
+  
+</div>

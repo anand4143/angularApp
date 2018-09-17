@@ -1,0 +1,173 @@
+<!--<div class="row top-buffer">  
+    <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 text-center">        
+        <h5>WE DON'T LIKE BEING NEW EITHER. ANSWER A FEW QUESTIONS FOR US SO WE CAN GET YOU RENTING YOUR APARTMENT.</h5>  
+    </div>        
+</div>-->
+
+<div *ngIf="!showSSN" class="adjust-dashboard" >
+    <form [formGroup]="rgNewFrm" (ngSubmit)="registerUsers()">
+      <div class="row top-buffer">
+        <div class="col-md-8 col-md-offset-2">
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <input type="text" id="User_First_Name" name="User_First_Name" minlength="2" maxlength="33" placeholder="FIRST NAME" [(ngModel)]="rgNewMdl.User_First_Name"  [formControl]="rgNewFrm.controls['User_First_Name']">
+                  <div class="error text-center" *ngIf="rgNewFrm.controls['User_First_Name'].touched && rgNewFrm.controls['User_First_Name'].hasError('required')">First Name is required.</div>
+                  <div class="error text-center" *ngIf="rgNewFrm.controls['User_First_Name'].touched && rgNewFrm.controls['User_First_Name'].hasError('minlength')">First Name should be atleast 2 characters.</div>
+                  <div class="error text-center" *ngIf="rgNewFrm.controls['User_First_Name'].touched && rgNewFrm.controls['User_First_Name'].hasError('maxlength')">First Name should be max 32 characters.</div>
+                  <!--<div class="error text-center" *ngIf="rgNewFrm.controls['User_First_Name'].touched && error">{{error}}</div>-->
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <input type="text" id="User_Last_Name" name="User_Last_Name" placeholder="LAST NAME"  [(ngModel)]="rgNewMdl.User_Last_Name" [formControl]="rgNewFrm.controls['User_Last_Name']">
+                <div class="error text-center" *ngIf="rgNewFrm.controls['User_Last_Name'].touched && rgNewFrm.controls['User_Last_Name'].hasError('required')">Last Name is required.</div>
+                <div class="error text-center" *ngIf="rgNewFrm.controls['User_Last_Name'].touched && rgNewFrm.controls['User_Last_Name'].hasError('minlength')">Last Name should be atleast 2 characters.</div>
+                <div class="error text-center" *ngIf="rgNewFrm.controls['User_Last_Name'].hasError('maxlength') && rgNewFrm.controls['User_Last_Name'].touched">Last Name should be max 32 characters.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <input type="text" id="Email.Email_Address" name="Email.Email_Address" placeholder="EMAIL ADDRESS"  [(ngModel)]="rgNewMdl['Email.Email_Address']"  [formControl]="rgNewFrm.controls['Email.Email_Address']" validateEmail>        
+                <div  class="error text-center" *ngIf="rgNewFrm.controls['Email.Email_Address'].touched && rgNewFrm.controls['Email.Email_Address'].hasError('required')">e-Mail is required.</div>
+                <div class="error text-center"  *ngIf="rgNewFrm.controls['Email.Email_Address'].touched && !rgNewFrm.controls['Email.Email_Address'].valid && !rgNewFrm.controls['Email.Email_Address'].hasError('required')">Enter a valid e-Mail</div>
+                <div class="error text-center" *ngIf="errorType =='Email'">{{errorMessage}}</div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                  <input type="text" limit-to="12" id="Contact.Contact_Num" name="Contact.Contact_Num" placeholder="PHONE NUMBER" [ngModel]="rgNewMdl['Contact.Contact_Num'] | phonenumber" (ngModelChange)="rgNewMdl['Contact.Contact_Num']=$event" [formControl]="rgNewFrm.controls['Contact.Contact_Num']" validatePhone OnlyNumber="true" >                  
+                  <div class="error text-center" *ngIf="rgNewFrm.controls['Contact.Contact_Num'].touched && rgNewFrm.controls['Contact.Contact_Num'].hasError('required')">Phone number is required.</div>
+                  <div class="error text-center" *ngIf="rgNewFrm.controls['Contact.Contact_Num'].touched && !rgNewFrm.controls['Contact.Contact_Num'].valid && !rgNewFrm.controls['Contact.Contact_Num'].hasError('required')">Enter a valid phone number</div>
+                  <div class="error text-center" *ngIf="rgNewFrm.controls['Contact.Contact_Num'].touched && rgNewFrm.controls['Contact.Contact_Num'].hasError('maxlength')">Phone number should be max 10 digits.</div>
+                  <div class="error text-center" *ngIf="errorType =='Phone'">{{errorMessage}}</div>
+                </div>
+            </div>
+          </div>
+
+          <!--<div class="row text-center">
+             <input type="radio" name="Gender" [(ngModel)]="rgNewMdl.User_Gender" value="M" [formControl]="rgNewFrm.controls['Gender']" > Male 
+             &nbsp;&nbsp; <input type="radio" name="Gender" [(ngModel)]="rgNewMdl.User_Gender" value="F" [formControl]="rgNewFrm.controls['Gender']" > Female
+             <div class="error text-center" *ngIf="rgNewFrm.controls['Gender'].touched && rgNewFrm.controls['Gender'].hasError('required')">Gender is required.</div>
+          </div>-->
+
+
+     <div class="row">
+        <div class="col-xs-6">
+          <div class="form-group">
+            <input type="text" id="User_SSN" name="User_SSN" placeholder="SOCIAL SECURITY NUMBER" OnlyNumber="true" limit-to="11"
+            [ngModel]="rgNewMdl.User_SSN | ssn" (ngModelChange)="rgNewMdl.User_SSN=$event" [formControl]="rgNewFrm.controls['User_SSN']" >
+            <div class="error text-center" *ngIf="rgNewFrm.controls['User_SSN'].touched && rgNewFrm.controls['User_SSN'].hasError('required')">social security number is required.</div>
+            <div class="error text-center" *ngIf="rgNewFrm.controls['User_SSN'].touched && !rgNewFrm.controls['User_SSN'].valid && rgNewFrm.controls['User_SSN'].hasError('pattern')">Enter a valid social security number</div>
+            <div class="error text-center" *ngIf="rgNewFrm.controls['User_SSN'].touched && error">{{error}}</div>
+          </div>
+        </div>  
+        <div class="col-xs-6 ">
+         <!--<div class="form-group margin-adjust">-->
+         <div class="form-group  margin-adjust">
+           <!--<my-date-picker placeholder="MM/DD/YYYY [ Birthday ]" OnlyNumber="true" [options]="myDatePickerOptions" [selDate]="selBirthday" (dateChanged)="onFromDateChanged($event)" ></my-date-picker> data-date=""-->
+            <input type="text" max="9999-12-31" (focus)="focusFunction($event)" (focusout)="outFocusFunction($event)" name="User_DOB" placeholder="Birthday" data-date-format="MM DD YYYY" [(ngModel)]="rgNewMdl.User_DOB" [formControl]="rgNewFrm.controls['User_DOB']">
+            <div class="error text-center" *ngIf="rgNewFrm.controls['User_DOB'].touched && rgNewFrm.controls['User_DOB'].hasError('required')">birthday date is required.</div>
+            <div class="error text-center" *ngIf="rgNewFrm.controls['User_DOB'].touched && !rgNewFrm.controls['User_DOB'].valid && !rgNewFrm.controls['User_DOB'].hasError('required')">Enter a valid birth date</div>
+             <div class="error text-center" *ngIf="rgNewFrm.controls['User_DOB'].touched && error">{{error}}</div>
+             <div class="error text-center">{{vmsg}}</div> 
+             <div class="error text-center" *ngIf="errorType =='Date'">{{errorMessage}}</div> 
+          </div>
+        </div> 
+      </div>
+
+
+    <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+             <input type="text" id="search-box" name="Address_2" placeholder="STREET ADDRESS" [(ngModel)]="rgNewMdl.Address_2"  [formControl]="rgNewFrm.controls['Address_2']"> 
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <input type="text" id="Address_1" name="Address_1" placeholder="APT #"  [(ngModel)]="rgNewMdl.Address_1" [ngModelOptions]="{standalone: true}">
+            <!--<input type="text" id="Address_1" name="Address_1" placeholder="APT #"  [(ngModel)]="rgMdl.Address_1" [formControl]="rgFrm.controls['Address_1']">
+            <div class="error text-center" *ngIf="rgFrm.controls['Address_1'].touched && rgFrm.controls['Address_1'].hasError('required')">Apt number is required.</div>-->
+          </div>
+        </div>
+      </div>
+
+
+    <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <input type="text" id="Address_City" name="Address_City" placeholder="City"  [(ngModel)]="rgNewMdl['Address_City']"  [formControl]="rgNewFrm.controls['Address_City']" >        
+            <div  class="error text-center" *ngIf="rgNewFrm.controls['Address_City'].touched && rgNewFrm.controls['Address_City'].hasError('required')">City is required.</div>
+          </div>
+        </div>   
+        <div class="col-sm-3">
+            <div class="form-group">
+              <input type="text"  id="Address_State_Abbr" name="Address_State_Abbr" placeholder="STATE" [ngModel]="rgNewMdl['Address_State_Abbr'] | phonenumber" (ngModelChange)="rgNewFrm['Address_State_Abbr']=$event" [formControl]="rgNewFrm.controls['Address_State_Abbr']" >              
+              <div class="error text-center" *ngIf="rgNewFrm.controls['Address_State_Abbr'].touched && rgNewFrm.controls['Address_State_Abbr'].hasError('required')">State is required.</div>
+            </div>
+        </div>    
+        <div class="col-sm-3">
+            <div class="form-group">
+              <input type="text" id="Address_ZipCode" name="Address_ZipCode" placeholder="ZIPCODE" maxlength="7" [(ngModel)]="rgNewMdl['Address_ZipCode']"  [formControl]="rgNewFrm.controls['Address_ZipCode']">              
+              <div class="error text-center" *ngIf="rgNewFrm.controls['Address_ZipCode'].touched && rgNewFrm.controls['Address_ZipCode'].hasError('required')">ZIPCODE is required.</div>
+              <div class="error text-center" *ngIf="rgNewFrm.controls['Address_ZipCode'].hasError('maxlength') && rgNewFrm.controls['Address_ZipCode'].touched">ZIPCODE is wrong</div>
+              <div class="error text-center" *ngIf="rgNewFrm.controls['Address_ZipCode'].hasError('maxlength') && !rgNewFrm.controls['Address_ZipCode'].dirty">ZIPCODE is wrong</div>
+              </div>
+        </div>        
+      </div>
+
+        <!--<div class="row">          
+        <div class="col-sm-offset-6 col-sm-6">
+            <div class="form-group">
+              <input type="text" id="Address_ZipCode" name="Address_ZipCode" placeholder="ZIPCODE" maxlength="7" [(ngModel)]="rgNewMdl['Address_ZipCode']"  [formControl]="rgNewFrm.controls['Address_ZipCode']">              
+              <div class="error text-center" *ngIf="rgNewFrm.controls['Address_ZipCode'].touched && rgNewFrm.controls['Address_ZipCode'].hasError('required')">ZIPCODE is required.</div>
+              <div class="error text-center" *ngIf="rgNewFrm.controls['Address_ZipCode'].hasError('maxlength') && rgNewFrm.controls['Address_ZipCode'].touched">ZIPCODE is wrong</div>
+              <div class="error text-center" *ngIf="rgNewFrm.controls['Address_ZipCode'].hasError('maxlength') && !rgNewFrm.controls['Address_ZipCode'].dirty">ZIPCODE is wrong</div>
+              </div>
+        </div>
+      </div>-->
+
+
+          <div class="row text-center">
+             <div class="error text-center" *ngIf="errorType =='General'">{{errorMessage}}</div>
+            <div class="col-xs-2  col-sm-offset-2"> </div>
+            <div class="col-xs-10 col-sm-6">
+              <recaptcha (resolved)="resolved($event)" siteKey="{{config.getCaptchaKey()}}" [(ngModel)]="rgNewMdl.captcha"
+                        name="captcha" [formControl]="rgNewFrm.controls['captcha']" ></recaptcha>
+            </div> 
+          </div>
+
+           <div class="row text-center">
+            <div class="col-xs-2"> </div>
+             <div class="col-xs-10 col-sm-12">
+               <input type="checkbox" name="termscondition" [(ngModel)]="rgNewMdl.termscondition" [formControl]="rgNewFrm.controls['termscondition']" (click)="disableSubmitBtn()"> 
+               <span class="adjust-terms-condition"> I agree to the&nbsp;
+                 <u>
+                   <a href="javascript:void(0);" (click)="tc()">Terms&nbsp; & &nbsp;Conditions</a>
+                 </u>
+               </span>
+                <div  class="error text-center" *ngIf="rgNewFrm.controls['termscondition'].touched && rgNewFrm.controls['termscondition'].hasError('required')">You must agree with the terms and conditions.</div>
+             </div>            
+          </div>
+          
+          <div class="row">
+            <div class="col-sm-12 text-center">
+              <div class="form-group buttons">
+                <div class="row">
+                  <div class="col-xs-2  col-sm-offset-2">
+                    <button class="backbtn" type="button" (click)="gbf()"></button>                 
+                  </div>
+                  <div class="col-xs-10 col-sm-6">
+                    <button [disabled]="!rgNewFrm.valid  || termsconditionsVar"  type="submit">REGISTER</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>

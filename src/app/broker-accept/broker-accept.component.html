@@ -1,0 +1,105 @@
+<div class="columns">
+  <div class="col-side bordered">
+    <!-- Start user progress component-->
+    <app-sidebar></app-sidebar>
+    <!-- End user progress component-->
+  </div>
+  <div class="col gutter-left"  style="width:100%;">
+    <div class="top-bordered">
+      <div class="top-icons">
+        <app-user-progress></app-user-progress>
+      </div>
+      <header class="row title-btns-split">
+        <div class="col-xs-12 col-sm-6 col-md-7 col-lg-8">
+          <!--<header class="title-btns-split">-->
+            <h1 *ngFor="let address of bkmrk.getAddressArray()">{{address}}<br/></h1>
+          <!--</header>-->
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-5 col-lg-4"> 
+          <div class="row">
+            <button class="col-xs-3 backbtn" type="button" (click)="gbf()"></button>
+            <span *ngIf="acceptError.length > 0">{{acceptError]}</span>
+            <div class="col-xs-9">
+              <button class="button" (click)="acceptApplication()">Accept</button>
+            </div>
+          </div>        
+            <!--<a class="button" (click)="acceptApplication()"><span>Accept</span></a>-->
+            <!--<div>
+              <h1>{{bkmAppSrv.getRenterInfo().name}} </h1>
+              <h1>{{bkmAppSrv.getRenterInfo().email}} </h1>
+              <h1>{{bkmAppSrv.getRenterInfo().phno}} </h1>
+              
+            </div>-->
+        </div>
+        <div class="text-right" *ngIf="bkmrk.getRenterInfo()">
+          <h1>{{bkmAppSrv.getRenterInfo().name}} / {{bkmAppSrv.getRenterInfo().email}} / {{bkmAppSrv.getRenterInfo().phno}}</h1>
+       </div>
+      </header>
+
+      <div class="row info-lists">
+        <div class="col-sm-6 col-md-3">
+          <ul class="first-is-title">
+            <li *ngFor="let rent of bkmrk.getRentArray()">{{rent}}<br/></li>
+          </ul>
+        </div>
+        <div class="col-sm-6 col-md-3">
+          <ul class="first-is-title">
+            <li *ngFor="let detail of bkmrk.getDetailArray()">{{detail}}<br/></li>
+          </ul>
+        </div>
+        <div class="col-sm-6 col-md-3">
+          <ul class="first-is-title">
+            <li [ngClass]="{'remove-bullets': bkmrk.isAmenitiesEmpty }" *ngFor="let amenities of bkmrk.getAmenitiesArray()">
+              <div *ngIf="!(checkIsArray(amenities))">{{amenities}}<br/></div>
+              <div *ngIf="checkIsArray(amenities)">
+                <span *ngFor="let item of amenities">{{item}}<br/></span>
+              </div>
+            </li> 
+          </ul>
+        </div>
+        <div class="col-sm-6 col-md-3">
+          <ul class="first-is-title">
+            <li [ngClass]="{'remove-bullets':bkmrk.isOpenHouseEmpty}" *ngFor="let openhouse of bkmrk.getOpenHouseArray()">
+              <div *ngIf="!(checkIsArray(openhouse))" >{{openhouse}}<br/></div>
+              <div *ngIf="checkIsArray(openhouse)" >
+                <div *ngFor="let item of openhouse">
+                  <span>OpenDate: {{item.date}}</span>
+                  <span>StartTime: {{item.start_time}}</span> 
+                  <span>EndTime: {{item.end_time}}</span>                       
+                </div>
+              </div>  
+            </li> 
+          </ul>
+        </div>
+      </div>
+
+      
+      <div id="myCarousel" class="carousel slide" *ngIf="bkmrk.getImageArrayLength()">
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner" role="listbox">
+          <div class="item" *ngFor="let propertyImage of bkmrk.getImageArray(); let i = index;" [ngClass]="{active:i==0}">
+            <img class="center-block" src="{{propertyImage['large']}}" > 
+          </div>          
+        </div>
+        <!-- Left and right controls -->
+        <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+          <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+          <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+
+      <br/>
+      <img  *ngFor="let propertyImage of bkmrk.getImageArray(); let i = index;" src="{{propertyImage['thumbnail']}}"  
+        class="img-thumbnail" width="76" height="59" data-target="#myCarousel"  [attr.data-slide-to]="i" [ngClass]="{active:i==0}">
+      
+      <br/>
+      <br/>
+      <!--<div>{{bkmrk.getAccessInfo()}}</div>-->
+
+    </div>
+  </div>
+</div>
