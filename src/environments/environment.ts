@@ -6,10 +6,10 @@
 export const environment = {
   production: false,
   //basePath: 'http://localhost:9000',
-  basePath: 'https://restapi.concreet.com',
-  recaptchaKey: '6Lf6FRQUAAAAAOV_3w-jsmf7SEvysu_Z90EwYdoL',
-  access_token: 'RGLCbWwqf1enteReir3lCkxhVQbIgAla',
+  basePath: 'https://restapipath.com',
+  recaptchaKey: 'asdfsdf',
+  access_token: 'sdfsdfsdf',
   numOfRecords: 10,
-  s3bucket: 'https://s3-us-west-2.amazonaws.com/development.fs.concreet.com/',
-  helloSign_clientID: '39b6578fda03de1d2969f479eb900d22'
+  s3bucket: 'https://s3asdfsdfsdfsdfdfsfd.sdf',
+  helloSign_clientID: 'asdfsdfsdfdf'
 };
